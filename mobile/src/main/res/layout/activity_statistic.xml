@@ -36,4 +36,70 @@
         app:layout_constraintStart_toStartOf="@+id/status_top"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="418dp"
+        android:layout_height="80dp"
+        android:text="\nสถิตเลขที่ออกบ่อยที่สุดใน 2 ปี"
+        android:textAlignment="center"
+        android:textSize="20"
+        app:layout_constraintTop_toBottomOf="@+id/status_top"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ScrollView
+        android:layout_width="395dp"
+        android:layout_height="585dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="137dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="396dp"
+        android:layout_height="43dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="\n3 ตัวบน"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="137dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="396dp"
+        android:layout_height="43dp"
+        android:background="#FFBB35"
+        android:text="117         840"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="180dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="396dp"
+        android:layout_height="43dp"
+        android:background="#ECD280"
+        android:text="\n3 ตัวล่าง"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="221dp" />
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="396dp"
+        android:layout_height="43dp"
+        android:background="#ECD280"
+        android:text="297         561"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="264dp" />
+
+
 </android.support.constraint.ConstraintLayout>
