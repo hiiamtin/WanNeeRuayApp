@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Random"></activity>
         <activity android:name=".Statistic" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
