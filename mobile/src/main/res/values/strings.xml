@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">WanNeeRuay</string>
+    <string name="app_name">Wan Nee Ruay</string>
+    <string name="back_bt"><![CDATA[<]]></string>
+    <string name="button">Button</string>
+    <string name="random">เขย่าเลข</string>
+    <string name="statistic">สถิติ</string>
 </resources>

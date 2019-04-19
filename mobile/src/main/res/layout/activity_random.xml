@@ -4,6 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Random">
+    tools:context=".Statistic">
+
+    <LinearLayout
+        android:id="@+id/status_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFC107"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/status_top_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/random"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/status_top"
+        app:layout_constraintEnd_toEndOf="@+id/status_top"
+        app:layout_constraintStart_toStartOf="@+id/status_top"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
