@@ -4,4 +4,5 @@
     <string name="button">Button</string>
     <string name="random">เขย่าเลข</string>
     <string name="statistic">สถิติ</string>
+    <string name="lekded">เลขเด็ดประจำงวด</string>
 </resources>
