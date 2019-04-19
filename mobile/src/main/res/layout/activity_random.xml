@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="@string/random"
+        android:text="เขย่าเลข"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -35,5 +35,28 @@
         app:layout_constraintEnd_toEndOf="@+id/status_top"
         app:layout_constraintStart_toStartOf="@+id/status_top"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/actionModeCloseDrawable"
+        android:backgroundTint="#FFC107"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="2dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="184dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="515dp"
+        android:layout_marginEnd="112dp"
+        android:backgroundTint="#FF9800"
+        android:text="มาเขย่าหาเลขกัน"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_top" />
 
 </android.support.constraint.ConstraintLayout>
