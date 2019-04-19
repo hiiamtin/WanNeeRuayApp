@@ -59,4 +59,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_top" />
 
+    <TextView
+        android:id="@+id/8"
+        android:layout_width="127dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="332dp"
+        android:background="@android:drawable/presence_online"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="8"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        app:layout_constraintTop_toBottomOf="@+id/status_top"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/7"
+        android:layout_width="127dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="142dp"
+        android:background="@android:drawable/presence_online"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="7"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/8"
+        tools:layout_editor_absoluteY="382dp" />
+
+    <TextView
+        android:id="@+id/3"
+        android:layout_width="127dp"
+        android:layout_height="120dp"
+        android:background="@android:drawable/presence_online"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="3"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="270dp"
+        tools:layout_editor_absoluteY="382dp" />
+
+    <TextView
+        android:id="@+id/9"
+        android:layout_width="127dp"
+        android:layout_height="120dp"
+        android:background="@android:drawable/presence_online"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="9"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="155dp" />
+
+    <TextView
+        android:id="@+id/4"
+        android:layout_width="127dp"
+        android:layout_height="120dp"
+        android:background="@android:drawable/presence_online"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="4"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        tools:layout_editor_absoluteX="199dp"
+        tools:layout_editor_absoluteY="155dp" />
+
+    <TextView
+        android:id="@+id/num2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginEnd="133dp"
+        android:text="เลขเด็ดนำโชค"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <TextView
+        android:id="@+id/num3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="เลขเด็ดนำพารวย"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="325dp" />
+
 </android.support.constraint.ConstraintLayout>
