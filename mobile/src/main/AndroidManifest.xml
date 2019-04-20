@@ -10,7 +10,7 @@
         android:supportsRtl="true"
          android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".History"></activity>
-        <activity android:name=".Random" />
+        <activity android:name=".RandomNumber" />
         <activity android:name=".check"/>
         <activity android:name=".Statistic" />
         <activity android:name=".Menu">
