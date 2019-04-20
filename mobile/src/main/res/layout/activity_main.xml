@@ -37,74 +37,110 @@
         app:layout_constraintStart_toStartOf="@+id/status_top"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="395dp"
-        android:layout_height="612dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:gravity="center|center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_top"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.35000002">
 
-        <TableRow
-            android:id="@+id/row1"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/date_text_1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/lekded_new"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/menu" />
 
-            <TextView
-                android:id="@+id/date_text_1"
-                android:layout_width="315dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/lekded_new"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="24sp" />
+        <TextView
+            android:id="@+id/date_text_2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/date_new"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_text_1" />
 
-        </TableRow>
+        <Button
+            android:id="@+id/lektaided_bt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FDC007"
+            android:text="@string/lektaided"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_text_2" />
 
-        <TableRow
-            android:id="@+id/row2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+        <Button
+            android:id="@+id/random_bt"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/random"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/lektaided_bt"
+            app:layout_constraintTop_toBottomOf="@+id/lektaided_bt" />
 
-            <TextView
-                android:id="@+id/date_text_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                tools:text="@string/date_new" />
-        </TableRow>
+        <Button
+            android:id="@+id/statistic_bt"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/statistic"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/lektaided_bt"
+            app:layout_constraintStart_toEndOf="@+id/random_bt"
+            app:layout_constraintTop_toBottomOf="@+id/lektaided_bt" />
 
-        <TableRow
-            android:id="@+id/row3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+        <Button
+            android:id="@+id/history_bt"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/history"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/random_bt"
+            app:layout_constraintStart_toStartOf="@+id/random_bt"
+            app:layout_constraintTop_toBottomOf="@+id/random_bt" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lektaided" />
-        </TableRow>
-    </TableLayout>
+        <Button
+            android:id="@+id/check_bt"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/check"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/statistic_bt"
+            app:layout_constraintStart_toStartOf="@+id/statistic_bt"
+            app:layout_constraintTop_toBottomOf="@+id/statistic_bt" />
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>
