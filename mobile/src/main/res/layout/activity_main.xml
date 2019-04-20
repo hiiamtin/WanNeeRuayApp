@@ -21,7 +21,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/status_top_text"
+        android:id="@+id/history_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -61,7 +61,11 @@
             android:text="@string/lekded_new"
             android:textAlignment="center"
             android:textColor="#000000"
+<<<<<<< HEAD
             android:textSize="18sp"
+=======
+            android:textSize="24sp"
+>>>>>>> master
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/menu" />
@@ -76,7 +80,11 @@
             android:text="@string/date_new"
             android:textAlignment="center"
             android:textColor="#000000"
+<<<<<<< HEAD
             android:textSize="20sp"
+=======
+            android:textSize="30sp"
+>>>>>>> master
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +99,11 @@
             android:layout_marginEnd="8dp"
             android:background="#FDC007"
             android:text="@string/lektaided"
+<<<<<<< HEAD
             android:textSize="18sp"
+=======
+            android:textSize="24sp"
+>>>>>>> master
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +115,11 @@
             android:layout_height="150dp"
             android:layout_marginTop="8dp"
             android:text="@string/random"
+<<<<<<< HEAD
             android:textSize="18sp"
+=======
+            android:textSize="24sp"
+>>>>>>> master
             app:layout_constraintStart_toStartOf="@+id/lektaided_bt"
             app:layout_constraintTop_toBottomOf="@+id/lektaided_bt" />
 
@@ -114,7 +130,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/statistic"
+<<<<<<< HEAD
             android:textSize="18sp"
+=======
+            android:textSize="24sp"
+>>>>>>> master
             app:layout_constraintEnd_toEndOf="@+id/lektaided_bt"
             app:layout_constraintStart_toEndOf="@+id/random_bt"
             app:layout_constraintTop_toBottomOf="@+id/lektaided_bt" />
@@ -125,7 +145,11 @@
             android:layout_height="150dp"
             android:layout_marginTop="8dp"
             android:text="@string/history"
+<<<<<<< HEAD
             android:textSize="18sp"
+=======
+            android:textSize="22sp"
+>>>>>>> master
             app:layout_constraintEnd_toEndOf="@+id/random_bt"
             app:layout_constraintStart_toStartOf="@+id/random_bt"
             app:layout_constraintTop_toBottomOf="@+id/random_bt" />
@@ -136,7 +160,11 @@
             android:layout_height="150dp"
             android:layout_marginTop="8dp"
             android:text="@string/check"
+<<<<<<< HEAD
             android:textSize="18sp"
+=======
+            android:textSize="24sp"
+>>>>>>> master
             app:layout_constraintEnd_toEndOf="@+id/statistic_bt"
             app:layout_constraintStart_toStartOf="@+id/statistic_bt"
             app:layout_constraintTop_toBottomOf="@+id/statistic_bt" />
