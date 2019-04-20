@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".check">
+
+    <LinearLayout
+        android:id="@+id/status_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFC107"
+        android:gravity="start|fill_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/back_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionModeCloseDrawable"
+            android:backgroundTint="#FFC107" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="408dp"
+        android:layout_height="666dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="70dp">
+
+        <Button
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:text="16 กันยายน 2561"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="385dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Textnum"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="กรุณาใส่ตัวเลข 6 หลัก"
+                android:inputType="numberDecimal" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/background_dark"
+                android:text="ตรวจ"
+                android:textColor="#FFFCFC"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="512dp"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/award1"
+                android:layout_width="412dp"
+                android:layout_height="21dp"
+                android:background="@android:color/holo_orange_light"
+                android:text="รางวัลที่ 1"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/awardnum1"
+                android:layout_width="410dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="026853"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/last2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="เลขท้าย 2 ตัว"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/lastnum2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="31"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/front3"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:background="@android:color/holo_orange_light"
+                android:text="เลขหน้า 3 ตัว"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/frontnum3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="106   947"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/last3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="เลขท้าย 3 ตัว"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/lastnum3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="181   519"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/near1"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:background="@android:color/holo_orange_light"
+                android:text="รางวัลข้างเคียงรางวัลที่ 1"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/nearnum1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="026852    026854"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/award2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="รางวัลที่ 2"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/awardnum2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="176248   625633   669525"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

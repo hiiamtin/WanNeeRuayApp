@@ -8,13 +8,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme">
+        <activity android:name=".check"></activity>
+        <activity android:name=".Random" />
+=======
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".Random"></activity>
+>>>>>>> 574e4fcf696f2c11d7b9c1f2110efe0bf94c0be3
         <activity android:name=".Statistic" />
         <activity android:name=".Menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
