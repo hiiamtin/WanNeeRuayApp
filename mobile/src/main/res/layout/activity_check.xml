@@ -57,7 +57,8 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="กรุณาใส่ตัวเลข 6 หลัก"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:autofillHints="" />
 
             <Space
                 android:layout_width="wrap_content"
