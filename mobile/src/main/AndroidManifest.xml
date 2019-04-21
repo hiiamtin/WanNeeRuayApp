@@ -12,7 +12,8 @@
          android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".History"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".RandomNumber"
             android:screenOrientation="portrait"/>
         <activity android:name=".CheckNumber"
