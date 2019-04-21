@@ -13,16 +13,35 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button btRandom = (Button)findViewById(R.id.random_bt);
+        final Button btRandom = findViewById(R.id.bt_random);
+        final Button btCheck = findViewById(R.id.bt_check);
+        final Button btHistory = findViewById(R.id.bt_history);
+        final Button btLektaided = findViewById(R.id.bt_lektaided);
+        final Button btStatistic = findViewById(R.id.bt_statistic);
         btRandom.setOnClickListener(this);
+        btCheck.setOnClickListener(this);
+        btHistory.setOnClickListener(this);
+        btLektaided.setOnClickListener(this);
+        btStatistic.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.random_bt:
-                Intent intent = new Intent(this, RandomNumber.class);
-                startActivity(intent);
+            case R.id.bt_random:
+                startActivity(new Intent(this, RandomNumber.class));
+                break;
+
+            case R.id.bt_check:
+                startActivity(new Intent(this, CheckNumber.class));
+                break;
+
+            case R.id.bt_history:
+                startActivity(new Intent(this, History.class));
+                break;
+
+            case R.id.bt_statistic:
+                startActivity(new Intent(this, Statistic.class));
                 break;
         }
     }
