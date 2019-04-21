@@ -45,13 +45,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="393dp"
-        android:layout_height="197dp"
+        android:id="@+id/linearLayout3"
+        android:layout_width="408dp"
+        android:layout_height="192dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="62dp">
 
@@ -63,7 +63,7 @@
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="8dp"
                 android:background="#000000"
@@ -76,7 +76,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="visible" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -99,8 +98,9 @@
 
             <Button
                 android:id="@+id/confirm_bt"
-                android:layout_width="63dp"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:background="#0E0D0D"
                 android:backgroundTint="#0E0D0D"
@@ -126,7 +126,8 @@
             <Button
                 android:id="@+id/clear_bt"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:background="#F44336"
                 android:text="CLEAR"
@@ -136,15 +137,20 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="395dp"
+        android:layout_width="0dp"
         android:layout_height="456dp"
+        android:background="#90FF9800"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="267dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ListView
+            style="@android:style/Widget.DeviceDefault.ExpandableListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="467dp"
+            android:background="#FF9800"
+            android:cacheColorHint="#FF0A0A" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
