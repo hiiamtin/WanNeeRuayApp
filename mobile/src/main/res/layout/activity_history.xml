@@ -86,16 +86,14 @@
 
             <EditText
                 android:id="@+id/add_lottery"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="323dp"
                 android:layout_height="61dp"
                 android:backgroundTint="#00131212"
                 android:ems="10"
-                android:fadingEdge="horizontal|vertical"
                 android:hint="กรุณาใส่ตัวเลข 6 หลัก"
-                android:inputType="number"
-                android:lineSpacingExtra="10sp"
-                android:typeface="normal" />
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:selectAllOnFocus="false" />
 
             <Button
                 android:id="@+id/confirm_bt"

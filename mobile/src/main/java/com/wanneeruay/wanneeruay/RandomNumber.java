@@ -1,8 +1,6 @@
 package com.wanneeruay.wanneeruay;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.media.Image;
+
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomNumber extends AppCompatActivity implements View.OnClickListener{
@@ -28,10 +23,9 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random);
 
-        picture = (ImageView)findViewById(R.id.p1);
-        numberLayout = (ConstraintLayout)findViewById(R.id.lektaided_layout);
-        final Button btRandom = (Button)findViewById(R.id.random_bt);
-
+        picture = findViewById(R.id.p1);
+        numberLayout = findViewById(R.id.bt_lektaided);
+        final Button btRandom = findViewById(R.id.bt_random);
 
         clear();
         btRandom.setOnClickListener(this);
@@ -48,15 +42,15 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
         status = true;
     }
     private void random(){
-        number = (TextView)findViewById(R.id.two0);
+        number = findViewById(R.id.two0);
         number.setText(String.valueOf(new Random().nextInt(10)));
-        number = (TextView)findViewById(R.id.two1);
+        number = findViewById(R.id.two1);
         number.setText(String.valueOf(new Random().nextInt(10)));
-        number = (TextView)findViewById(R.id.three0);
+        number = findViewById(R.id.three0);
         number.setText(String.valueOf(new Random().nextInt(10)));
-        number = (TextView)findViewById(R.id.three1);
+        number = findViewById(R.id.three1);
         number.setText(String.valueOf(new Random().nextInt(10)));
-        number = (TextView)findViewById(R.id.three2);
+        number = findViewById(R.id.three2);
         number.setText(String.valueOf(new Random().nextInt(10)));
     }
 

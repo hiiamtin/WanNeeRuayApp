@@ -15,7 +15,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".RandomNumber"
             android:screenOrientation="portrait"/>
-        <activity android:name=".check"
+        <activity android:name=".CheckNumber"
             android:screenOrientation="portrait"/>
         <activity android:name=".Statistic"
             android:screenOrientation="portrait"/>
