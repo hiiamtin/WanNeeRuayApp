@@ -35,7 +35,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
         android:text="เขย่าเลข"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="@+id/status_top"
@@ -45,15 +45,15 @@
 
     <Button
         android:id="@+id/random_bt"
-        android:layout_width="184dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#FF9800"
         android:text="มาเขย่าหาเลขกัน"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.9" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/lektaided_bt"
+        android:id="@+id/lektaided_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
             android:layout_marginBottom="8dp"
             android:text="เลขเด็ดนำโชค"
             android:textColor="@android:color/background_dark"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,24 +103,26 @@
             app:layout_constraintTop_toBottomOf="@+id/num2">
 
             <TextView
-                android:id="@+id/two_1"
-                android:layout_width="127dp"
-                android:layout_height="120dp"
+                android:id="@+id/two0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@android:drawable/presence_online"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:text="9"
                 android:textAlignment="center"
-                android:textSize="80sp" />
+                android:gravity="center"
+                android:textSize="50sp" />
 
             <TextView
-                android:id="@+id/two_2"
-                android:layout_width="127dp"
-                android:layout_height="120dp"
+                android:id="@+id/two1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@android:drawable/presence_online"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:text="4"
                 android:textAlignment="center"
-                android:textSize="80sp" />
+                android:gravity="center"
+                android:textSize="50sp" />
 
         </LinearLayout>
 
@@ -132,7 +134,7 @@
             android:layout_marginBottom="8dp"
             android:text="เลขเด็ดนำพารวย"
             android:textColor="@android:color/background_dark"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,8 +142,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="395dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
@@ -152,50 +154,54 @@
             app:layout_constraintTop_toBottomOf="@+id/num3">
 
             <TextView
-                android:id="@+id/three_1"
-                android:layout_width="127dp"
-                android:layout_height="120dp"
+                android:id="@+id/three0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@android:drawable/presence_online"
                 android:backgroundTint="@android:color/holo_orange_light"
                 android:text="8"
                 android:textAlignment="center"
-                android:textSize="80sp" />
+                android:gravity="center"
+                android:textSize="50sp" />
 
             <TextView
-                android:id="@+id/three_2"
-                android:layout_width="127dp"
-                android:layout_height="120dp"
+                android:id="@+id/three1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@android:drawable/presence_online"
                 android:backgroundTint="@android:color/holo_orange_light"
                 android:text="7"
                 android:textAlignment="center"
-                android:textSize="80sp" />
+                android:gravity="center"
+                android:textSize="50sp" />
 
             <TextView
-                android:id="@+id/three_3"
-                android:layout_width="127dp"
-                android:layout_height="120dp"
+                android:id="@+id/three2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@android:drawable/presence_online"
                 android:backgroundTint="@android:color/holo_orange_light"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
                 android:text="3"
                 android:textAlignment="center"
-                android:textSize="80sp" />
+                android:gravity="center"
+                android:textSize="50sp" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
+        android:id="@+id/p1"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:contentDescription="random_pic"
         app:layout_constraintBottom_toTopOf="@+id/random_bt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_top"
-        app:srcCompat="@drawable/random00" />
+        app:srcCompat="@drawable/random00"
+        tools:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>
