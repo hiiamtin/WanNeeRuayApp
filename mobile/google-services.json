@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "333819576386",
+    "firebase_url": "https://wanneeruayapp.firebaseio.com",
+    "project_id": "wanneeruayapp",
+    "storage_bucket": "wanneeruayapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333819576386:android:5afc37e0744856ad",
+        "android_client_info": {
+          "package_name": "com.wanneeruay.wanneeruay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333819576386-6fv39hassnjhas8qtelhv5dlmo74qv29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wanneeruay.wanneeruay",
+            "certificate_hash": "d458acb4249f605f609bc4cb531911ec94b874c3"
+          }
+        },
+        {
+          "client_id": "333819576386-c82abved41oejuu94koovo4hckpakjuk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgWFxedj2mn3OLVDmbac1mJkkCb1ckVMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333819576386-c82abved41oejuu94koovo4hckpakjuk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

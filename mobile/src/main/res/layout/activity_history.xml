@@ -37,7 +37,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
         android:text="ประวัติการซื้อ"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="@+id/status_top"
