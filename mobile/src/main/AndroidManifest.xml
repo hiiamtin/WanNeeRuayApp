@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.wanneeruay.wanneeruay">
+
     <uses-feature
         android:name="android.hardware.sensor.accelrometer"
-        android:required = "true"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,20 +17,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".wallet" 
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Mostnum" 
-            android:screenOrientation="portrait"/>
-        <activity android:name=".History"
+        <activity android:name=".Qrcode"></activity>
+        <activity
+            android:name=".wallet"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Mostnum"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".History"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".RandomNumber"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CheckNumber"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Statistic"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Menu"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".RandomNumber"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CheckNumber"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Statistic"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Menu"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
