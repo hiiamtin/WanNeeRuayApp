@@ -39,7 +39,7 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
         sm.registerListener(sensorListener,sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_NORMAL);
         ace1Val = SensorManager.GRAVITY_EARTH;
         ace1Last= SensorManager.GRAVITY_EARTH;
-        shake = 9.8f;
+        shake = 0.00f;
         clear();
         btRandom.setOnClickListener(this);
     }
