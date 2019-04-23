@@ -9,4 +9,9 @@
     <string name="lektaided">เลขท้ายเด็ด</string>
     <string name="history">ประวัติการซื้อ</string>
     <string name="check">ตรวจหวย</string>
+    <string-array name="wallet">
+        <item>ถูก</item>
+        <item>ไม่ถูก</item>
+        <item>ซื้อ</item>
+    </string-array>
 </resources>
