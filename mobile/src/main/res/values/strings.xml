@@ -10,8 +10,8 @@
     <string name="history">ประวัติการซื้อ</string>
     <string name="check">ตรวจหวย</string>
     <string-array name="wallet">
+        <item>ซื้อ</item>
         <item>ถูก</item>
         <item>ไม่ถูก</item>
-        <item>ซื้อ</item>
     </string-array>
 </resources>

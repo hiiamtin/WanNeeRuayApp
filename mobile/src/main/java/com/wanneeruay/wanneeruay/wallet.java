@@ -16,13 +16,14 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         setContentView(R.layout.activity_wallet);
         final Button ok_bt = findViewById(R.id.OK);
         ok_bt.setOnClickListener(this);
-        ok_bt.setText("ยืนยัน");
+
         Spinner spin = findViewById(R.id.choose_wal);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.wallet, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
         spin.setOnItemSelectedListener(this);
         EditText priceLot = findViewById(R.id.Priceloterry);
+        ok_bt.setText("ยืนยัน");
     }
 
     @Override
