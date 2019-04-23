@@ -43,6 +43,9 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
             case R.id.bt_statistic:
                 startActivity(new Intent(this, Statistic.class));
                 break;
+            case R.id.bt_lektaided:
+                startActivity(new Intent(this,Mostnum.class));
+                break;
         }
     }
 }
