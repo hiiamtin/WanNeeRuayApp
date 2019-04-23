@@ -1,7 +1,6 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
@@ -15,9 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.wanneeruay.wanneeruay.Firebase.FirebaseHelper;
 import java.util.ArrayList;
 
 public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
