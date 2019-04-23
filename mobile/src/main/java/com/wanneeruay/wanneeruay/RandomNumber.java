@@ -54,8 +54,8 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
             ace1Val = (float) Math.sqrt((double) (x*x+y*y+z*z));
             float delta = ace1Val - ace1Last;
             //shake = shake * 0.9f + delta ;
-            //number = findViewById(R.id.two0);number.setText(String.valueOf(ace1Val));
-            if ((ace1Val > 12)  && (status == true) ){
+            //number = findViewById(R.id.two0);number.setText(String.valueOf(shake));
+            if ((ace1Val > 16)  && (status == true) ){
                 shack();
             }
         }
