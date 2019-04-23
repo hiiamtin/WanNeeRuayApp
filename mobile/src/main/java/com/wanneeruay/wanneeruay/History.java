@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.wanneeruay.wanneeruay.Firebase.FirebaseHelper;
+import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
+
 public class History extends AppCompatActivity implements View.OnClickListener{
 
     EditText number;

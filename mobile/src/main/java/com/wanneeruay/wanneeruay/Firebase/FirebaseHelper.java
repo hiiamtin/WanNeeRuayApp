@@ -1,21 +1,30 @@
 package com.wanneeruay.wanneeruay.Firebase;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseHelper {
     DatabaseReference db;
     Boolean save = null;
+    ArrayList<String> spacecrafts = new ArrayList<>();
 
     public FirebaseHelper(DatabaseReference db) {
+        this.db = db;
+    }
+
+    public DatabaseReference getDb() {
+        return db;
+    }
+
+    public void setDb(DatabaseReference db) {
         this.db = db;
     }
 
@@ -25,7 +34,7 @@ public class FirebaseHelper {
             save = false;
         }else{
             try {
-                db.child("lottary_date").setValue(spacecraft);
+                db.child(spacecraft.getKey()).setValue(spacecraft.value);
                 save=true;
             }catch (DatabaseException e){
                 e.printStackTrace();
@@ -37,26 +46,10 @@ public class FirebaseHelper {
 
     //READ
     public ArrayList<String> retrieve(){
-        final ArrayList<String> spacecrafts = new ArrayList<>();
-        db.addChildEventListener(new ChildEventListener() {
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                fetchData(dataSnapshot,spacecrafts);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                fetchData(dataSnapshot,spacecrafts);
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                fetchData(dataSnapshot,spacecrafts);
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                fetchData(dataSnapshot,spacecrafts);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                fetchData(dataSnapshot);
             }
 
             @Override
@@ -64,15 +57,14 @@ public class FirebaseHelper {
 
             }
         });
-
         return spacecrafts;
     }
 
-    private void fetchData(DataSnapshot snapshot,ArrayList<String> spacecrafts){
+    private void fetchData(DataSnapshot snapshot){
         spacecrafts.clear();
         for (DataSnapshot ds:snapshot.getChildren()) {
-            String name = ds.getValue(Spacecraft.class).getValue();
-            spacecrafts.add(name);
+            spacecrafts.add(ds.getValue(String.class));
         }
+
     }
 }

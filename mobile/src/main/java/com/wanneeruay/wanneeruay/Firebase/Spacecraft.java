@@ -1,18 +1,18 @@
 package com.wanneeruay.wanneeruay.Firebase;
 
 public class Spacecraft {
-    String id;
+    String key;
     String value;
 
     public Spacecraft() {
     }
 
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getValue() {
@@ -21,5 +21,10 @@ public class Spacecraft {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

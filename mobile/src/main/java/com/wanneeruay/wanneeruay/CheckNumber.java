@@ -1,6 +1,7 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
@@ -14,27 +15,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.List;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.wanneeruay.wanneeruay.Firebase.FirebaseHelper;
+import java.util.ArrayList;
 
 public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     EditText number;
+    ArrayList<String> date=Menu.date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
 
+
         number = findViewById(R.id.text_input_numberC);
         final Button btConferm = findViewById(R.id.bt_confermC);
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Spinner dateSp = findViewById(R.id.spinner_date);
-        ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
-        dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dateSp.setAdapter(dateSelecAp);
-
-        dateSp.setOnItemSelectedListener(this);
 
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
@@ -49,6 +49,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 showKeyboard(v);
             }
         });
+
+        dateSp.setAdapter(updateSpiner());
+        dateSp.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -58,7 +61,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
+                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
                     Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
+
                 }else{
                     number.requestFocus();
                 }
@@ -105,5 +110,14 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+
+    private ArrayAdapter<String> updateSpiner(){
+        ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,date);
+        data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
+        //dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return data;
     }
 }
