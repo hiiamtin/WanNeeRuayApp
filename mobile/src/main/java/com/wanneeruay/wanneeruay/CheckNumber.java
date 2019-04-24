@@ -32,6 +32,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Spinner dateSp = findViewById(R.id.spinner_date);
 
+        dateSp.setAdapter(updateSpiner());
+        dateSp.setOnItemSelectedListener(this);
+
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
 
@@ -46,8 +49,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        dateSp.setAdapter(updateSpiner());
-        dateSp.setOnItemSelectedListener(this);
     }
 
     @Override
