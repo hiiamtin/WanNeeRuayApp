@@ -1,6 +1,7 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
@@ -29,11 +30,12 @@ public class History extends AppCompatActivity implements View.OnClickListener{
         number = findViewById(R.id.text_input_number);
         final Button btConferm = findViewById(R.id.bt_conferm);
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
-
+        final Button btMoney = findViewById(R.id.manage_money_bt);
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
 
         btConferm.setOnClickListener(this);
+        btMoney.setOnClickListener(this);
         ct.setOnClickListener(this);
         number.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus) {
@@ -60,6 +62,9 @@ public class History extends AppCompatActivity implements View.OnClickListener{
             case R.id.constraintLayout:
                 checkErrorTextInput(v);
                 hideSoftKeyboard(v);
+                break;
+            case R.id.manage_money_bt:
+                startActivity(new Intent(this,Qrcode.class));
                 break;
         }
     }
