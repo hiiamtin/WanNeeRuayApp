@@ -21,7 +21,7 @@ import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 public class History extends AppCompatActivity implements View.OnClickListener{
 
     EditText number;
-    static String readQr;
+    static String readQr ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +31,13 @@ public class History extends AppCompatActivity implements View.OnClickListener{
         final Button btConferm = findViewById(R.id.bt_conferm);
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
         final Button btMoney = findViewById(R.id.manage_money_bt);
+        final Button btQr = findViewById(R.id.Qrbut);
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
         btConferm.setOnClickListener(this);
         btMoney.setOnClickListener(this);
         ct.setOnClickListener(this);
+        btQr.setOnClickListener(this);
         number.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus) {
                 checkErrorTextInput(v);
@@ -62,12 +64,11 @@ public class History extends AppCompatActivity implements View.OnClickListener{
                 checkErrorTextInput(v);
                 hideSoftKeyboard(v);
                 break;
-            case R.id.manage_money_bt:
+            case R.id.Qrbut:
                 startActivity(new Intent(this, Qrcode.class));
-                String m = Qrcode.Qrtext;
-                Toast toast = Toast.makeText(getApplicationContext(),"Please Shake ME!!! <3" ,Toast.LENGTH_LONG);
-                toast.setGravity(0,0,0);
-                toast.show();
+                break;
+            case R.id.manage_money_bt:
+                startActivity(new Intent(this, wallet.class));
                 break;
         }
     }
@@ -96,9 +97,9 @@ public class History extends AppCompatActivity implements View.OnClickListener{
         InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-    public  void toastprint(){
-        Toast toast = Toast.makeText(getApplicationContext(),readQr ,Toast.LENGTH_LONG);
-        toast.setGravity(0,0,0);
+    public  void toastprint() {
+        Toast toast = Toast.makeText(getApplicationContext(), readQr, Toast.LENGTH_LONG);
+        toast.setGravity(0, 0, 0);
         toast.show();
     }
 }

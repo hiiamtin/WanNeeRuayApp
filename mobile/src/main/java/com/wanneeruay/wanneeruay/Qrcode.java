@@ -87,6 +87,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                             //vibrator.vibrate(1000);
                             textView.setText(qrCodes.valueAt(0).displayValue);
                             History.readQr = (String) textView.getText();
+                            CheckNumber.readQr = (String) textView.getText();
                             Toast toast = Toast.makeText(getApplicationContext(),History.readQr ,Toast.LENGTH_LONG);
                             toast.setGravity(0,0,0);
                             toast.show();

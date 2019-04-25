@@ -1,6 +1,7 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
@@ -22,6 +23,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     EditText number;
     ArrayList<String> date=Menu.date;
     ArrayList<String> lottary_data=Menu.lottary_data;
+    static String readQr  ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         final Button btConferm = findViewById(R.id.bt_confermC);
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Spinner dateSp = findViewById(R.id.spinner_date);
+        final Button butQr2 = findViewById(R.id.QrbutC);
 
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
@@ -43,6 +46,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
         btConferm.setOnClickListener(this);
         ct.setOnClickListener(this);
+        butQr2.setOnClickListener(this);
         number.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus) {
                 checkErrorTextInput(v);
@@ -71,6 +75,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             case R.id.constraintLayoutC:
                 checkErrorTextInput(v);
                 hideSoftKeyboard(v);
+                break;
+            case R.id.Qrbut:
+                startActivity(new Intent(this, Qrcode.class));
                 break;
         }
     }
