@@ -57,7 +57,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         });
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -76,7 +75,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 checkErrorTextInput(v);
                 hideSoftKeyboard(v);
                 break;
-            case R.id.Qrbut:
+            case R.id.QrbutC:
                 startActivity(new Intent(this, Qrcode.class));
                 break;
         }

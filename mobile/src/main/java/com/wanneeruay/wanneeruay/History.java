@@ -55,6 +55,7 @@ public class History extends AppCompatActivity implements View.OnClickListener{
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
+                    number.setText("");
                     Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
                 }else{
                     number.requestFocus();
