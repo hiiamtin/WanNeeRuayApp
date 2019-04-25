@@ -1,5 +1,6 @@
 package com.wanneeruay.wanneeruay;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +20,9 @@ import java.util.ArrayList;
 
 public class Menu extends AppCompatActivity implements View.OnClickListener{
 
-    public static FirebaseHelper helper;
-    public static DatabaseReference db;
+    private static FirebaseHelper helper;
     public static ArrayList<String> date;
+    public static ArrayList<String> lottary_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,9 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         final Button btHistory = findViewById(R.id.bt_history);
         final Button btLektaided = findViewById(R.id.bt_lektaided);
         final Button btStatistic = findViewById(R.id.bt_statistic);
-        db = FirebaseDatabase.getInstance().getReference("lottary_date");
-        helper = new FirebaseHelper(db);
-        loadata();
+        helper = new FirebaseHelper(FirebaseDatabase.getInstance());
+        loaddate();
+        updateLottary_data();
         btRandom.setOnClickListener(this);
         btCheck.setOnClickListener(this);
         btHistory.setOnClickListener(this);
@@ -45,6 +46,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        helper.updateLottaryDB();
         switch (v.getId()){
             case R.id.bt_random:
                 startActivity(new Intent(this, RandomNumber.class));
@@ -67,7 +69,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    private void savedata(){
+    private void savedate(){
         SharedPreferences sp = getSharedPreferences("lottary_date", this.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
@@ -76,8 +78,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         editor.apply();
     }
 
-    private void loadata(){
-        date = helper.retrieve();
+    private void loaddate(){
+        date = helper.updateLottaryDate();
         if(date==null){
             Toast.makeText(this, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_LONG).show();
             SharedPreferences sp = getSharedPreferences("lottary_date", this.MODE_PRIVATE);
@@ -86,14 +88,15 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
             Type type = new TypeToken<ArrayList<String>>() {}.getType();
             date = gson.fromJson(json,type);
             if(date == null){
-                if(date==null) {
                     Toast.makeText(this, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_LONG).show();
                     date.clear();
                     date.add("ไม่มีข้อมูล");
-                }
-            }else{savedata();}
-        }
+            }
+        }else{savedate();}
+    }
 
+    public static void updateLottary_data(){
+        lottary_data = helper.updateLottaryDB();
     }
 
 }

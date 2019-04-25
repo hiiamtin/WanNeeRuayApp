@@ -14,12 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     EditText number;
     ArrayList<String> date=Menu.date;
+    ArrayList<String> lottary_data=Menu.lottary_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         final Button btConferm = findViewById(R.id.bt_confermC);
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Spinner dateSp = findViewById(R.id.spinner_date);
+
+        dateSp.setAdapter(updateSpiner());
+        dateSp.setOnItemSelectedListener(this);
+        Toast.makeText(this,lottary_data.toString(),Toast.LENGTH_LONG).show();
 
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
@@ -46,8 +52,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        dateSp.setAdapter(updateSpiner());
-        dateSp.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -58,7 +62,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
                     //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
-                    Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
+                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
 
                 }else{
                     number.requestFocus();
