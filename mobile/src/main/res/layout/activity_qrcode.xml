@@ -8,26 +8,23 @@
 
     <SurfaceView
         android:id="@+id/Camsurface"
-        android:layout_width="412dp"
-        android:layout_height="485dp"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
         android:layout_marginTop="114dp"
-        android:layout_marginBottom="132dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Qrstr"
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
+        android:layout_height="020dp"
         android:layout_marginStart="177dp"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="176dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Camsurface" />
 
