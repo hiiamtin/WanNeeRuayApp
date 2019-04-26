@@ -53,43 +53,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/text_input_numberC"
                 style="@style/Widget.AppCompat.AutoCompleteTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="6"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="กรุณาใส่ตัวเลข 6 หลัก"
+                android:hint="ใส่ตัวเลข 6 หลัก"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:maxLength="6"
+                android:textSize="16sp"
                 tools:targetApi="o" />
 
             <Button
                 android:id="@+id/bt_confermC"
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:backgroundTint="@android:color/background_dark"
                 android:text="ตรวจ"
                 android:textColor="#FFFCFC"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/QrbutC"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="Qrcode" />
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="4"
+                android:background="@drawable/qr_code_scanner_icon" />
         </LinearLayout>
 
     </LinearLayout>
