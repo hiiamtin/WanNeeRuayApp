@@ -79,11 +79,11 @@
 
             <EditText
                 android:id="@+id/text_input_number"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_blue_dark"
-                android:ems="10"
+                android:ems="6"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:hint="กรุณาใส่ตัวเลข 6 หลัก"
@@ -96,7 +96,7 @@
             <Button
                 android:id="@+id/bt_conferm"
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:backgroundTint="@android:color/background_dark"
@@ -107,7 +107,7 @@
 
             <Button
                 android:id="@+id/Qrbut"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:backgroundTint="#C114DA3F"

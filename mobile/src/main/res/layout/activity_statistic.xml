@@ -17,307 +17,168 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
-
-    </LinearLayout>
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/history_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/statistic"
+        android:textColor="@android:color/background_dark"
         android:textSize="22sp"
         android:textStyle="bold"
         android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/status_top"
         app:layout_constraintEnd_toEndOf="@+id/status_top"
         app:layout_constraintStart_toStartOf="@+id/status_top"
         app:layout_constraintTop_toTopOf="@+id/status_top" />
 
     <LinearLayout
-        android:id="@+id/status_down"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif-black"
-        android:text="สถิตเลขที่ออกบ่อยที่สุดใน 2 ปี"
-        android:textColor="@color/colorTextblack"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/status_down"
-        app:layout_constraintEnd_toEndOf="@+id/status_down"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="@+id/status_down"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <LinearLayout
-        android:id="@+id/status_data"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="#FFC107"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:visibility="visible">
+        app:layout_constraintTop_toBottomOf="@+id/status_top">
 
-        <Space
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="  เลข 3 ตัวบน"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="117          840"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="#FF9800"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="0dp"
-                android:fontFamily="sans-serif-black"
-                android:text="  เลขท้าย 3 ตัว"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-black"
-                android:text="297          561"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="  เลขหน้า 3 ตัว"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="512    626    726    930"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="#FF9800"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="0dp"
-                android:fontFamily="sans-serif-black"
-                android:text="  เลข 2 ตัวบน"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-black"
-                android:text="	15     24     31"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="  เลขท้าย 2 ตัว"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="	65          85"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextblack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/status_data"
-                app:layout_constraintEnd_toEndOf="@+id/status_data"
-                app:layout_constraintHorizontal_bias="0.027"
-                app:layout_constraintStart_toStartOf="@+id/status_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.929" />
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="สถิติเลขหวยที่ออกมากที่สุดใน 2 ปี"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextblack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/up3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="เลข 3 ตัวบน"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/upnum3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="117    840"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/back3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="เลข 3 ตัวล่าง"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/backnum3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="297    561"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/front3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="เลข 3 ตัวหน้า"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/frontnum3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="512   626   726   930"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/up2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="เลข 2 ตัวบน"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/upnum2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:text="15   24   31"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/back2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="เลข 2 ตัวท้าย"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/backnum2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_light"
+                android:text="65    85"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
