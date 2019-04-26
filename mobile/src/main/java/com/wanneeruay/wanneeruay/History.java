@@ -2,6 +2,7 @@ package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
@@ -17,38 +18,43 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class History extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
 
-    EditText number;
+    static EditText number;
     ArrayList<String> date=Menu.date;
-    static String readQr ;
+    static String readQr;
+    ArrayList<String> number_his = new ArrayList<>();
+    Spinner dateSp;
+    ListView hisList ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
         number = findViewById(R.id.text_input_number);
         final Button btConferm = findViewById(R.id.bt_conferm);
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
-        final Spinner dateSp = findViewById(R.id.spinner_date_H);
-        final ListView listV = findViewById(R.id.list_history);
 
+
+        hisList =findViewById(R.id.list_history);
+        dateSp = findViewById(R.id.spinner_date_H);
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
         Spacecraft test = Menu.lottary_data.get(6);
         ArrayList<ArrayList<String>> testt = test.getValue();
         Toast.makeText(this,testt.get(2).toString(),Toast.LENGTH_LONG).show();
         //listV.setAdapter(updatelistView());
-
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
-
         btConferm.setOnClickListener(this);
         btMoney.setOnClickListener(this);
         ct.setOnClickListener(this);
@@ -62,6 +68,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 showKeyboard(v);
             }
         });
+
+        loadhis(dateSp.getSelectedItem().toString());
     }
 
     @Override
@@ -71,8 +79,10 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
+                    number_his.add(number_his.size(),number.getText().toString());
+                    savehis(dateSp.getSelectedItem().toString(),number_his);
                     number.setText("");
-                    Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
+                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
                 }else{
                     number.requestFocus();
                 }
@@ -109,7 +119,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
+        //Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
+        loadhis(dateSp.getSelectedItem().toString());
     }
 
     @Override
@@ -145,4 +156,32 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         toast.setGravity(0, 0, 0);
         toast.show();
     }
+    private void savehis(String key,ArrayList<String> data){
+        SharedPreferences sp = getSharedPreferences("History_number", this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        editor.putString(key,json);
+        editor.apply();
+        loadhis(dateSp.getSelectedItem().toString());
+    }
+    private void loadhis(String key){
+        SharedPreferences sharedPreferences = getSharedPreferences("History_number", this.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(key,null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        number_his = gson.fromJson(json,type);
+        if(number_his == null){
+            Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
+            hisList.setVisibility(View.INVISIBLE);
+        }
+        else{
+            // Toast.makeText(this,dateSp.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+            ArrayAdapter hisAdabt = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,number_his);
+            hisList.setAdapter(hisAdabt);
+            //Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
 }

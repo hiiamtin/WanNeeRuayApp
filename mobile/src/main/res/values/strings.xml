@@ -12,6 +12,5 @@
     <string-array name="wallet">
         <item>ซื้อ</item>
         <item>ถูก</item>
-        <item>ไม่ถูก</item>
     </string-array>
 </resources>

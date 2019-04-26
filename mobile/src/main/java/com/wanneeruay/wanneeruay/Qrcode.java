@@ -4,7 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Camera;
+import android.hardware.Camera;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -33,6 +33,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     BarcodeDetector barcodeDetector;
     static TextView textView;
     static String Qrtext;
+    Camera camera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +87,9 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                             //Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                             //vibrator.vibrate(1000);
                             textView.setText(qrCodes.valueAt(0).displayValue);
-                            History.readQr = (String) textView.getText();
+                           // History.readQr = (String) textView.getText();
                             CheckNumber.readQr = (String) textView.getText();
+                            History.number.setText(History.readQr);
                             Toast toast = Toast.makeText(getApplicationContext(),History.readQr ,Toast.LENGTH_LONG);
                             toast.setGravity(0,0,0);
                             toast.show();
@@ -105,6 +107,14 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.Camsurface :
+                android.hardware.Camera.Parameters params = camera.getParameters();
+                if (params.getSupportedFocusModes().contains(
+                        android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+                    params.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                }
+                camera.setParameters(params);
+        }
     }
 }
