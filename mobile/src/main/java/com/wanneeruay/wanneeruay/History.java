@@ -13,8 +13,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 
 import java.util.ArrayList;
 
@@ -34,9 +37,14 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
         final Spinner dateSp = findViewById(R.id.spinner_date_H);
+        final ListView listV = findViewById(R.id.list_history);
 
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
+        Spacecraft test = Menu.lottary_data.get(6);
+        ArrayList<ArrayList<String>> testt = test.getValue();
+        Toast.makeText(this,testt.get(2).toString(),Toast.LENGTH_LONG).show();
+        //listV.setAdapter(updatelistView());
 
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
@@ -119,6 +127,13 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     }
     private ArrayAdapter<String> updateSpiner(){
         ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,date);
+        data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
+        //dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return data;
+    }
+    private ArrayAdapter<String> updatelistView(){
+        ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,Menu.date);
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
         //dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

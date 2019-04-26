@@ -11,14 +11,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class FirebaseHelper {
-    
+
     DatabaseReference db,db2;
     Boolean save = null;
     ArrayList<String> spacecrafts = new ArrayList<>();
-    ArrayList<String> spacecrafts2 = new ArrayList<>();
+    ArrayList<Spacecraft> spacecraftDB = new ArrayList<>();
     FirebaseDatabase FB;
 
     public FirebaseHelper(FirebaseDatabase FB) {
@@ -59,20 +60,18 @@ public class FirebaseHelper {
         return spacecrafts;
     }
 
-    public ArrayList<String> updateLottaryDB(){
-        db2 = FB.getReference("lottary_db").child("TYPE");
+    public ArrayList<Spacecraft> updateLottaryDB(){
+        db2 = FB.getReference("lottary_db");
         db2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                fetchData(dataSnapshot,spacecrafts2);
+                fetchData2(dataSnapshot,spacecraftDB);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                spacecrafts2.clear();
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {spacecraftDB.clear();}
         });
-        return spacecrafts2;
+        return spacecraftDB;
     }
 
     private void fetchData(DataSnapshot snapshot,ArrayList<String> sp){
@@ -81,5 +80,20 @@ public class FirebaseHelper {
             sp.add(ds.getValue(String.class));
         }
 
+    }
+    private void fetchData2(DataSnapshot snapshot,ArrayList<Spacecraft> sp){
+        sp.clear();
+        for (DataSnapshot ds:snapshot.child("62").getChildren()){
+            Spacecraft x = new Spacecraft();
+            x.setKey(ds.getKey());
+            for (DataSnapshot dss :ds.getChildren()) {
+                ArrayList<String> value = new ArrayList<>();
+                for (DataSnapshot dsss:dss.getChildren()){
+                    value.add(dsss.getValue(String.class));
+                }
+                x.addValue(value);
+            }
+            sp.add(x);
+        }
     }
 }
