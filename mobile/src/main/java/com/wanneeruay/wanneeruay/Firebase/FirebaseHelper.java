@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FirebaseHelper {
-    
+
     DatabaseReference db,db2;
     Boolean save = null;
     ArrayList<String> spacecrafts = new ArrayList<>();
