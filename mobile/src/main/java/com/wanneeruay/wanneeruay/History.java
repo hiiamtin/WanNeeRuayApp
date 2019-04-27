@@ -1,6 +1,8 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.view.MotionEvent;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -63,10 +66,44 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 showKeyboard(v);
             }
         });
-
         loadhis(dateSp.getSelectedItem().toString());
-    }
+        hisList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder altdial = new AlertDialog.Builder(History.this);
+                altdial.setMessage("Do you want to delete this number?")
+                        .setCancelable(false).setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        number_his.remove(position);
+                        savehis(dateSp.getSelectedItem().toString(),number_his);
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alert = altdial.create();
+                alert.setTitle("DELETE");
+                alert.show();
+                return false;
+            }
+        });
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // MotionEvent object holds X-Y values
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            String text = "You click at x = " + event.getX() + " and y = " + event.getY();
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        }
+
+        return super.onTouchEvent(event);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -151,7 +188,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         toast.setGravity(0, 0, 0);
         toast.show();
     }
-    private void savehis(String key,ArrayList<String> data){
+    public void savehis(String key,ArrayList<String> data ){
         SharedPreferences sp = getSharedPreferences("History_number", this.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
@@ -160,7 +197,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         editor.apply();
         loadhis(dateSp.getSelectedItem().toString());
     }
-    private void loadhis(String key){
+    public void loadhis(String key){
         SharedPreferences sharedPreferences = getSharedPreferences("History_number", this.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(key,null);
