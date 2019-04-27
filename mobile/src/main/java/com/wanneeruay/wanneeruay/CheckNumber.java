@@ -136,17 +136,17 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
     private void checkNumberReward(){
         String s = number.getText().toString();
-        Boolean[] reward = new Boolean[9];
+        boolean[] reward = new boolean[9];
         if(s.equals(settext.get(0).getText().toString())){
             reward[0]=true;
-            Toast.makeText(getApplicationContext(),"ถูกรางวัลที่ 1"+reward[0].toString(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"ถูกรางวัลที่ 1"+reward[0].toString(),Toast.LENGTH_LONG).show();
         }
         for (int i = 1; i < 6; i++) {
             String[] num = settext.get(i).getText().toString().split(" ");
             for (int j = 0; j < num.length; j++) {
                 if(s.equals(num[j])){
                     reward[i]=true;
-                    Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+i,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+i,Toast.LENGTH_LONG).show();
                     break;
                 }
             }
@@ -155,7 +155,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         for (int j = 0; j < num.length; j++) {
             if(s.substring(0,3).equals(num[j])){
                 reward[6]=true;
-                Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+6,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+6,Toast.LENGTH_LONG).show();
                 break;
             }
         }
@@ -163,7 +163,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         for (int j = 0; j < num.length; j++) {
             if(s.substring(3).equals(num[j])){
                 reward[7]=true;
-                Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+7,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+7,Toast.LENGTH_LONG).show();
                 break;
             }
         }
@@ -171,8 +171,41 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         for (int j = 0; j < num.length; j++) {
             if(s.substring(4).equals(num[j])){
                 reward[8]=true;
-                Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+8,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+8,Toast.LENGTH_LONG).show();
                 break;
+            }
+        }
+        for (int i = 0; i < reward.length; i++) {
+            if (reward[i]){
+                switch (i){
+                    case 0:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่1",Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลข้างเคียงที่1",Toast.LENGTH_LONG).show();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่2",Toast.LENGTH_LONG).show();
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่3",Toast.LENGTH_LONG).show();
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่4",Toast.LENGTH_LONG).show();
+                        break;
+                    case 5:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่5",Toast.LENGTH_LONG).show();
+                        break;
+                    case 6:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัล",Toast.LENGTH_LONG).show();
+                        break;
+                    case 7:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่2",Toast.LENGTH_LONG).show();
+                        break;
+                    case 8:
+                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่2",Toast.LENGTH_LONG).show();
+                        break;
+                }
             }
         }
     }
