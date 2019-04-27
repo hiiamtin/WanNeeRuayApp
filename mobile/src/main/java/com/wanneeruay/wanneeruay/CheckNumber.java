@@ -137,11 +137,11 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     private void checkNumberReward(){
         String s = number.getText().toString();
         Boolean[] reward = new Boolean[9];
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
         if(s==settext.get(0).getText().toString()){
             reward[0]=true;
             Toast.makeText(getApplicationContext(),"ถูกรางวัลที่ 1",Toast.LENGTH_LONG).show();
         }
-    }
 
     }
 
