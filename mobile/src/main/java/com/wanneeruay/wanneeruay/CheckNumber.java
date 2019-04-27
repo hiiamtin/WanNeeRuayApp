@@ -1,10 +1,12 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -75,7 +78,8 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
-                    checkNumberReward();
+                    popupSaveHistory(checkNumberReward());
+                    number.setText("");
                 }else{
                     number.requestFocus();
                 }
@@ -134,7 +138,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    private void checkNumberReward(){
+    private String checkNumberReward(){
         String s = number.getText().toString();
         boolean[] reward = new boolean[9];
         if(s.equals(settext.get(0).getText().toString())){
@@ -143,71 +147,88 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }
         for (int i = 1; i < 6; i++) {
             String[] num = settext.get(i).getText().toString().split(" ");
-            for (int j = 0; j < num.length; j++) {
-                if(s.equals(num[j])){
-                    reward[i]=true;
+            for (String s1 : num) {
+                if (s.equals(s1)) {
+                    reward[i] = true;
                     //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+i,Toast.LENGTH_LONG).show();
                     break;
                 }
             }
         }
         String[] num = settext.get(6).getText().toString().split(" ");
-        for (int j = 0; j < num.length; j++) {
-            if(s.substring(0,3).equals(num[j])){
-                reward[6]=true;
+        for (String s1 : num) {
+            if (s.substring(0, 3).equals(s1)) {
+                reward[6] = true;
                 //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+6,Toast.LENGTH_LONG).show();
                 break;
             }
         }
         num = settext.get(7).getText().toString().split(" ");
-        for (int j = 0; j < num.length; j++) {
-            if(s.substring(3).equals(num[j])){
-                reward[7]=true;
+        for (String s1 : num) {
+            if (s.substring(3).equals(s1)) {
+                reward[7] = true;
                 //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+7,Toast.LENGTH_LONG).show();
                 break;
             }
         }
         num = settext.get(8).getText().toString().split(" ");
-        for (int j = 0; j < num.length; j++) {
-            if(s.substring(4).equals(num[j])){
-                reward[8]=true;
+        for (String s1 : num) {
+            if (s.substring(4).equals(s1)) {
+                reward[8] = true;
                 //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+8,Toast.LENGTH_LONG).show();
                 break;
             }
         }
+        String x = "เสียใจด้วยคุณไม่ถูกรางวัลใดๆ";
         for (int i = 0; i < reward.length; i++) {
             if (reward[i]){
                 switch (i){
                     case 0:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่1",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัลที่1";
                         break;
                     case 1:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลข้างเคียงที่1",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัลข้างเคียงที่1";
                         break;
                     case 2:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่2",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัลที่2";
                         break;
                     case 3:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่3",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัลที่3";
                         break;
                     case 4:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่4",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัลที่4";
                         break;
                     case 5:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่5",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัลที่5";
                         break;
                     case 6:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัล",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัล3ตัวหน้า";
                         break;
                     case 7:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่2",Toast.LENGTH_LONG).show();
-                        break;
+                        x="ถูกรางวัล3ตัวท้าย";
                     case 8:
-                        Toast.makeText(getApplicationContext(),"ถูกรางวัลที่2",Toast.LENGTH_LONG).show();
+                        x="ถูกรางวัล2ตัวท้าย";
                         break;
                 }
             }
         }
+        return x;
+    }
+
+    private void popupSaveHistory(String s){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        if(s.equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+            builder.setMessage(s);
+        }else{
+            builder.setMessage(s+"\nบันทึกลงในประวัติ?");
+            builder.setPositiveButton("บันทึก", (dialog, id) -> {});
+            builder.setNegativeButton("ไม่", (dialog, id) -> {
+                // Do something
+            });
+        }
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private ArrayAdapter<String> updateSpiner(){

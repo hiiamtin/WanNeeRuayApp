@@ -1,7 +1,9 @@
 package com.wanneeruay.wanneeruay;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -14,6 +16,7 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     Camera.Parameters params;
     Camera camera = Camera.open();
     //android.graphics.Camera cam;
+    boolean stop = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,16 +96,47 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                     textView.post(new Runnable() {
                         @Override
                         public void run() {
-                            //Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                            //vibrator.vibrate(1000);
-                            textView.setText(qrCodes.valueAt(0).displayValue);
-                           // History.readQr = (String) textView.getText();
-                            CheckNumber.readQr = (String) textView.getText();
-                            History.number.setText(History.readQr);
-                            Toast toast = Toast.makeText(getApplicationContext(),History.readQr ,Toast.LENGTH_LONG);
-                            toast.setGravity(0,0,0);
-                            toast.show();
-                            finish();
+
+                            if (stop == true) {
+
+                                textView.setText(qrCodes.valueAt(0).displayValue);
+                                 History.readQr = (String) textView.getText();
+                                CheckNumber.readQr = (String) textView.getText();
+                                AlertDialog.Builder altdial = new AlertDialog.Builder(Qrcode.this);
+                                altdial.setMessage("คุณต้องการบันทึกเลขนี้ไว้หรือไม่?");
+                                altdial.setCancelable(false);
+                                altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent resultIntent = new Intent();
+                                        resultIntent.putExtra("result",textView.getText());
+                                        setResult(RESULT_CANCELED,resultIntent);
+                                        finish();
+                                    }
+                                });
+                                altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent resultIntent = new Intent();
+                                        resultIntent.putExtra("result",textView.getText());
+                                        setResult(RESULT_OK,resultIntent);
+                                        //History.number.setText(History.readQr);
+                                        //History.number_his.add(History.number_his.size(), History.readQr);
+                                        //History saveH = null;
+                                        //History.savehis(History.dateSp.getSelectedItem().toString(), History.number_his);
+                                        finish();
+                                    }
+                                });
+                                AlertDialog alert = altdial.create();
+                                alert.setTitle("Record");
+                                alert.show();
+                                stop = false;
+                            }
+
+                           // Toast toast = Toast.makeText(getApplicationContext(),History.readQr ,Toast.LENGTH_LONG);
+                           // toast.setGravity(0,0,0);
+                           // toast.show();
+
                         }
                     });
                 }
