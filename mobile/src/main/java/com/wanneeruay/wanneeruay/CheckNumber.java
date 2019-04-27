@@ -14,16 +14,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     EditText number;
     ArrayList<String> date=Menu.date;
     ArrayList<Spacecraft> lottary_data=Menu.lottary_data;
-    static String readQr  ;
+    static String readQr;
+    ArrayList<TextView> settext = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +39,18 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Spinner dateSp = findViewById(R.id.spinner_date);
         final Button butQr2 = findViewById(R.id.QrbutC);
+        settext.add(findViewById(R.id.awardnum1));
+        settext.add(findViewById(R.id.nearnum1));
+        settext.add(findViewById(R.id.awardnum2));
+        settext.add(findViewById(R.id.awardnum3));
+        settext.add(findViewById(R.id.awardnum4));
+        settext.add(findViewById(R.id.awardnum5));
+        settext.add(findViewById(R.id.frontnum3));
+        settext.add(findViewById(R.id.lastnum3));
+        settext.add(findViewById(R.id.lastnum2));
 
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
-        //Toast.makeText(this,lottary_data.toString(),Toast.LENGTH_LONG).show();
 
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
@@ -64,7 +75,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
-                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
                     //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
 
                 }else{
@@ -111,6 +121,13 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
+        Spacecraft group = lottary_data.get(parent.getSelectedItemPosition());
+        ArrayList<ArrayList<String>> type = group.getValue();
+        for (int i = 0; i < 9; i++) {
+            Collections.sort(type.get(i));
+            settext.get(i).setText(type.get(i).toString()
+                    .replace("[", "").replace("]", "").replace(",",""));
+        }
     }
 
     @Override
@@ -118,12 +135,13 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    private void checkNumberReward(){
+
+    }
 
     private ArrayAdapter<String> updateSpiner(){
         ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,date);
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
-        //dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return data;
     }
 }

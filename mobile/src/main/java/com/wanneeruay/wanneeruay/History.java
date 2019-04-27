@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -44,15 +43,11 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
 
-
         hisList =findViewById(R.id.list_history);
         dateSp = findViewById(R.id.spinner_date_H);
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
-        Spacecraft test = Menu.lottary_data.get(6);
-        ArrayList<ArrayList<String>> testt = test.getValue();
-        Toast.makeText(this,testt.get(2).toString(),Toast.LENGTH_LONG).show();
-        //listV.setAdapter(updatelistView());
+
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
         btConferm.setOnClickListener(this);

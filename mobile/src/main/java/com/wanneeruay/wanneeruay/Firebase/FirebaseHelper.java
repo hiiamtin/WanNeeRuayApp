@@ -18,7 +18,7 @@ public class FirebaseHelper {
 
     DatabaseReference db,db2;
     Boolean save = null;
-    ArrayList<String> spacecrafts = new ArrayList<>();
+    ArrayList<String> spacecrafts;
     ArrayList<Spacecraft> spacecraftDB = new ArrayList<>();
     FirebaseDatabase FB;
 
@@ -46,6 +46,7 @@ public class FirebaseHelper {
     //READ
     public ArrayList<String> updateLottaryDate(){
         db = FB.getReference("lottary_date");
+        spacecrafts = new ArrayList<>();
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -85,7 +86,7 @@ public class FirebaseHelper {
         sp.clear();
         for (DataSnapshot ds:snapshot.child("62").getChildren()){
             Spacecraft x = new Spacecraft();
-            x.setKey(ds.getKey());
+            x.setKey("62-"+ds.getKey());
             for (DataSnapshot dss :ds.getChildren()) {
                 ArrayList<String> value = new ArrayList<>();
                 for (DataSnapshot dsss:dss.getChildren()){
