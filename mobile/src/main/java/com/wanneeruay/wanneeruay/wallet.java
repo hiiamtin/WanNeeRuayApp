@@ -87,7 +87,6 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         editor.putInt(key,data);
         editor.apply();
         loadwal();
-        //loadhis(dateSp.getSelectedItem().toString());
     }
    public void loadwal(){
         SharedPreferences sharedPreferences = getSharedPreferences("Wallet", this.MODE_PRIVATE);
