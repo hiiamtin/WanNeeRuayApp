@@ -35,7 +35,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
         android:text="เขย่าเลข"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="@+id/status_top"

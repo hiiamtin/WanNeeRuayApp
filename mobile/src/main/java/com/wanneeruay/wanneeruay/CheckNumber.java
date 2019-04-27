@@ -75,8 +75,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
-                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
-
+                    checkNumberReward();
                 }else{
                     number.requestFocus();
                 }
@@ -136,7 +135,46 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     }
 
     private void checkNumberReward(){
-
+        String s = number.getText().toString();
+        Boolean[] reward = new Boolean[9];
+        if(s.equals(settext.get(0).getText().toString())){
+            reward[0]=true;
+            Toast.makeText(getApplicationContext(),"ถูกรางวัลที่ 1"+reward[0].toString(),Toast.LENGTH_LONG).show();
+        }
+        for (int i = 1; i < 6; i++) {
+            String[] num = settext.get(i).getText().toString().split(" ");
+            for (int j = 0; j < num.length; j++) {
+                if(s.equals(num[j])){
+                    reward[i]=true;
+                    Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+i,Toast.LENGTH_LONG).show();
+                    break;
+                }
+            }
+        }
+        String[] num = settext.get(6).getText().toString().split(" ");
+        for (int j = 0; j < num.length; j++) {
+            if(s.substring(0,3).equals(num[j])){
+                reward[6]=true;
+                Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+6,Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
+        num = settext.get(7).getText().toString().split(" ");
+        for (int j = 0; j < num.length; j++) {
+            if(s.substring(3).equals(num[j])){
+                reward[7]=true;
+                Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+7,Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
+        num = settext.get(8).getText().toString().split(" ");
+        for (int j = 0; j < num.length; j++) {
+            if(s.substring(4).equals(num[j])){
+                reward[8]=true;
+                Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+8,Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
     }
 
     private ArrayAdapter<String> updateSpiner(){
