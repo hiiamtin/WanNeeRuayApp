@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.MotionEvent;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,11 +30,11 @@ import java.util.ArrayList;
 public class History extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
 
     static EditText number;
-    ArrayList<String> date=Menu.date;
+    static ArrayList<String> date=Menu.date;
     static String readQr;
-    ArrayList<String> number_his = new ArrayList<>();
-    Spinner dateSp;
-    ListView hisList ;
+    static ArrayList<String> number_his = new ArrayList<>();
+    static Spinner dateSp;
+    static ListView hisList ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +105,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         return super.onTouchEvent(event);
     }
     @Override
-    public void onClick(View v) {
+    public  void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_conferm:
                 checkErrorTextInput(v);
@@ -124,7 +124,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 hideSoftKeyboard(v);
                 break;
             case R.id.Qrbut:
-                startActivity(new Intent(this, Qrcode.class));
+                Intent intent = new Intent(History.this,Qrcode.class);
+                startActivityForResult(intent,1);
                 break;
             case R.id.manage_money_bt:
                 startActivity(new Intent(this, wallet.class));
@@ -216,4 +217,16 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //number.setText("555555");
+         if (requestCode == 1){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                number_his.add(number_his.size(),result);
+                savehis(dateSp.getSelectedItem().toString(),number_his);
+            }
+        }
+    }
 }
