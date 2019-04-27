@@ -83,7 +83,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     private void loadDate(){
         date = helper.updateLottaryDate();
         if(date==null){
-            Toast.makeText(this, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_LONG).show();
             SharedPreferences sp = getSharedPreferences("lottary_date", this.MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sp.getString("date_file",null);
