@@ -33,7 +33,9 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     BarcodeDetector barcodeDetector;
     static TextView textView;
     static String Qrtext;
-    Camera camera;
+    Camera.Parameters params;
+    Camera camera = Camera.open();
+    //android.graphics.Camera cam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,12 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+                params = camera.getParameters();
+                if (params.getSupportedFocusModes().contains(
+                        android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+                    params.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                }
+
                 if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                     return;
                 }
@@ -109,12 +117,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Camsurface :
-                android.hardware.Camera.Parameters params = camera.getParameters();
-                if (params.getSupportedFocusModes().contains(
-                        android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
-                    params.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-                }
-                camera.setParameters(params);
+                //camera.setParameters(params);
         }
     }
 }
