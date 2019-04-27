@@ -143,6 +143,8 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    }
+
     private ArrayAdapter<String> updateSpiner(){
         ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,date);
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
