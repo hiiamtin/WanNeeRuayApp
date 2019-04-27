@@ -55,7 +55,8 @@
             android:text="2 พ.ค.  2562"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -80,23 +81,23 @@
                 android:id="@+id/acadrank1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="แม่จำเนียร"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="1"
                 android:text="36.50%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -104,10 +105,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFC107"
-            android:text="36 13 841"
+            android:text="36   13   841"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/rank2"
@@ -125,7 +127,7 @@
                 android:text="หมูเซียน"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank2"
@@ -136,7 +138,7 @@
                 android:text="29.54%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -144,10 +146,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FF9800"
-            android:text="20 28"
+            android:text="20    28"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/rank3"
@@ -160,23 +163,23 @@
                 android:id="@+id/acadrank3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="อาจารย์หนู"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="1"
                 android:text="27.31%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -184,10 +187,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFC107"
-            android:text="25 83 522"
+            android:text="25   83   522"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -206,7 +210,7 @@
                 android:text="เซียนฟันธง"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank4"
@@ -217,7 +221,7 @@
                 android:text="25%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -225,10 +229,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FF9800"
-            android:text="90 96 496"
+            android:text="90   96   496"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/rank5"
@@ -241,23 +246,23 @@
                 android:id="@+id/acadrank5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="เลขนายดำ"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="1"
                 android:text="23.25%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -265,10 +270,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFC107"
-            android:text="42 45 072"
+            android:text="42   45   072"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/rank6"
@@ -286,7 +292,7 @@
                 android:text="เจ้าแม่ตะเคียนทอง"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank6"
@@ -297,7 +303,7 @@
                 android:text="22.22%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -305,10 +311,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FF9800"
-            android:text="23 32 253"
+            android:text="23   32   253"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -322,23 +329,23 @@
                 android:id="@+id/acadrank7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="ขวัญใจคนยาก"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="1"
                 android:text="20.10%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -346,10 +353,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFC107"
-            android:text="12 32 072"
+            android:text="12   32   072"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -368,7 +376,7 @@
                 android:text="เลขมงคลชัย"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank8"
@@ -379,7 +387,7 @@
                 android:text="20%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -387,10 +395,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FF9800"
-            android:text="02 42 702"
+            android:text="02   42   702"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -404,23 +413,23 @@
                 android:id="@+id/acadrank9"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="หลวงพ่อปากแดง"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="1"
                 android:text="19.56%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -428,10 +437,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFC107"
-            android:text="68 82 089"
+            android:text="68   82   089"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/rank10"
@@ -449,7 +459,7 @@
                 android:text="ม้าสีหมอก"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/percentrank10"
@@ -460,7 +470,7 @@
                 android:text="9.47%"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -468,10 +478,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FF9800"
-            android:text="51 58"
+            android:text="51    58"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
