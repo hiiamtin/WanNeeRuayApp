@@ -2,11 +2,13 @@ package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -183,7 +185,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         toast.show();
     }
     public void savehis(String key,ArrayList<String> data ){
-        SharedPreferences sp = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
         String json = gson.toJson(data);
@@ -192,7 +194,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         loadhis(dateSp.getSelectedItem().toString());
     }
     public void loadhis(String key){
-        SharedPreferences sharedPreferences = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();

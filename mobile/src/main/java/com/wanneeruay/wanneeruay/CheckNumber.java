@@ -1,11 +1,13 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -225,9 +227,11 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }else{
             builder.setMessage(s+"\nบันทึกลงในประวัติ?");
             builder.setPositiveButton("บันทึก", (dialog, id) -> {
+                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
                 text.add(number.getText().toString());
-                savehis(String.valueOf(dateSp.getSelectedItemPosition()),text);
+                savehis(dateSp.getSelectedItem().toString(),text);
+                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 number.setText("");
             });
             builder.setNegativeButton("ไม่", (dialog, id) -> {
@@ -245,7 +249,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     }
 
     public void savehis(String key,ArrayList<String> data ){
-        SharedPreferences sp = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
         String json = gson.toJson(data);
@@ -255,7 +259,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
     public ArrayList<String> loadhis(String key){
         ArrayList<String> value;
-        SharedPreferences sharedPreferences = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();

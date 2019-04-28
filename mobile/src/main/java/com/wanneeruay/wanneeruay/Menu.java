@@ -24,6 +24,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     private static FirebaseHelper helper;
     public static ArrayList<String> date;
     public static ArrayList<Spacecraft> lottary_data;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         final Button btHistory = findViewById(R.id.bt_history);
         final Button btLektaided = findViewById(R.id.bt_lektaided);
         final Button btStatistic = findViewById(R.id.bt_statistic);
+        context = this;
 
         helper = new FirebaseHelper(FirebaseDatabase.getInstance());
         update();
