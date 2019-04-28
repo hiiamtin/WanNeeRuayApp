@@ -47,7 +47,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this,String.valueOf(helper.isStatus()),Toast.LENGTH_SHORT).show();
         switch (v.getId()){
             case R.id.bt_random:
                 startActivity(new Intent(this, RandomNumber.class));

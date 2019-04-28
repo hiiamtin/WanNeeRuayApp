@@ -52,6 +52,7 @@ public class FirebaseHelper {
     public ArrayList<String> updateLottaryDate(Context context){
         db = FB.getReference("lottary_date");
         spacecrafts = new ArrayList<>();
+        AlertDialog al = loadinPopUp(context);
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -60,13 +61,16 @@ public class FirebaseHelper {
                     Toast.makeText(context, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
                     loadDate(context);
                 }else{
+                    Toast.makeText(context,"Date loaded",Toast.LENGTH_SHORT).show();
                     savedDate(context);
                 }
+                al.cancel();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                spacecrafts=null;
+                spacecrafts.clear();
+                al.cancel();
             }
         });
         return spacecrafts;
@@ -86,7 +90,7 @@ public class FirebaseHelper {
                     Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
                     loadDB(context);
                 }else{
-                    Toast.makeText(context,"loaded",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"DB loaded",Toast.LENGTH_SHORT).show();
                     savedDB(context);
                 }
             }
@@ -162,7 +166,7 @@ public class FirebaseHelper {
         String json = gson.toJson(spacecraftDB);
         editor.putString("DB_file",json);
         editor.apply();
-        Toast.makeText(context, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
     }
 
     private void loadDate(Context context){
@@ -187,7 +191,7 @@ public class FirebaseHelper {
         String json = gson.toJson(spacecrafts);
         editor.putString("DB_file",json);
         editor.apply();
-        Toast.makeText(context, "UPDATE FILE DATE", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "UPDATE FILE DATE", Toast.LENGTH_SHORT).show();
     }
 
 }
