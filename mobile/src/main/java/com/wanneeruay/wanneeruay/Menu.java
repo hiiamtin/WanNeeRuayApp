@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -36,6 +37,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         final Button btLektaided = findViewById(R.id.bt_lektaided);
         final Button btStatistic = findViewById(R.id.bt_statistic);
         helper = new FirebaseHelper(FirebaseDatabase.getInstance());
+        boolean check = helper.checkConnection();
+        Toast.makeText(this,String.valueOf(check),Toast.LENGTH_SHORT).show();
         loadDate();
         loadDB();
         btRandom.setOnClickListener(this);
@@ -77,22 +80,24 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         String json = gson.toJson(date);
         editor.putString("date_file",json);
         editor.apply();
-        Toast.makeText(this, "UPDATE FILE DATE", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "UPDATE FILE DATE", Toast.LENGTH_SHORT).show();
     }
 
     private void loadDate(){
         date = helper.updateLottaryDate();
         if(date==null){
-            Toast.makeText(this, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
             SharedPreferences sp = getSharedPreferences("lottary_date", this.MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sp.getString("date_file",null);
             Type type = new TypeToken<ArrayList<String>>() {}.getType();
             date = gson.fromJson(json,type);
             if(date == null){
-                    Toast.makeText(this, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_SHORT).show();
                     date.clear();
                     date.add("ไม่มีข้อมูล");
+            }else{
+                Toast.makeText(this, "LOAD ข้อมูล Date สำรอง", Toast.LENGTH_SHORT).show();
             }
         }else{saveDate();}
     }
@@ -103,23 +108,25 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         String json = gson.toJson(date);
         editor.putString("DB_file",json);
         editor.apply();
-        Toast.makeText(this, "UPDATE FILE DB", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
     }
     private void loadDB(){
         lottary_data = helper.updateLottaryDB();
-        if(lottary_data==null){
-            Toast.makeText(this, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_LONG).show();
+        if(date==null){
+            Toast.makeText(this, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
             SharedPreferences sp = getSharedPreferences("lottary_db", this.MODE_PRIVATE);
             Gson gson = new Gson();
             String json = sp.getString("DB_file",null);
             Type type = new TypeToken<ArrayList<Spacecraft>>() {}.getType();
             lottary_data = gson.fromJson(json,type);
             if(lottary_data == null){
-                Toast.makeText(this, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_SHORT).show();
                 lottary_data.clear();
                 Spacecraft text = new Spacecraft();
                 text.setKey("Error");
                 lottary_data.add(text);
+            }else{
+                Toast.makeText(this, "LOAD ข้อมูล DB สำรอง", Toast.LENGTH_SHORT).show();
             }
         }else{savedDB();}
     }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.MotionEvent;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,11 +30,11 @@ import java.util.ArrayList;
 public class History extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
 
     static EditText number;
-    ArrayList<String> date=Menu.date;
+    static ArrayList<String> date=Menu.date;
     static String readQr;
-    ArrayList<String> number_his = new ArrayList<>();
-    Spinner dateSp;
-    ListView hisList ;
+    static ArrayList<String> number_his = new ArrayList<String>();
+    static Spinner dateSp;
+    static ListView hisList ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +79,14 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                         dialog.cancel();
                     }
                 })
-                .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        number_his.remove(position);
-                        savehis(dateSp.getSelectedItem().toString(),number_his);
-                        dialog.cancel();
-                    }
-                });
+                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                number_his.remove(position);
+                                savehis(dateSp.getSelectedItem().toString(),number_his);
+                                dialog.cancel();
+                            }
+                        });
                 AlertDialog alert = altdial.create();
                 alert.setTitle("DELETE");
                 alert.show();
@@ -95,26 +95,16 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         });
     }
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        // MotionEvent object holds X-Y values
-        if(event.getAction() == MotionEvent.ACTION_DOWN) {
-            String text = "You click at x = " + event.getX() + " and y = " + event.getY();
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-        }
-
-        return super.onTouchEvent(event);
-    }
-    @Override
-    public void onClick(View v) {
+    public  void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_conferm:
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
-                    number_his.add(number_his.size(),number.getText().toString());
-                    savehis(dateSp.getSelectedItem().toString(),number_his);
+                    ArrayList<String> text = number_his;
+                    text.add(number.getText().toString());
+                    savehis(dateSp.getSelectedItem().toString(),text);
                     number.setText("");
-                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
                 }else{
                     number.requestFocus();
                 }
@@ -124,7 +114,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 hideSoftKeyboard(v);
                 break;
             case R.id.Qrbut:
-                startActivity(new Intent(this, Qrcode.class));
+                Intent intent = new Intent(History.this,Qrcode.class);
+                startActivityForResult(intent,1);
                 break;
             case R.id.manage_money_bt:
                 startActivity(new Intent(this, wallet.class));
@@ -153,6 +144,9 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         String text = parent.getItemAtPosition(position).toString();
         //Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
         loadhis(dateSp.getSelectedItem().toString());
+        if(number_his.toString().equals("[]") ){
+            Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -203,17 +197,31 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         String json = sharedPreferences.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         number_his = gson.fromJson(json,type);
-        if(number_his == null){
-            Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
+        ArrayList<String> text = new ArrayList<String>();
+        if((number_his == null) || (number_his.toString().equals("[]") )){
+            // Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
             hisList.setVisibility(View.INVISIBLE);
+            number_his = new ArrayList<String>();
         }
         else{
-            // Toast.makeText(this,dateSp.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, number_his.toString(), Toast.LENGTH_LONG).show();
+            hisList.setVisibility(View.VISIBLE);
             ArrayAdapter hisAdabt = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,number_his);
             hisList.setAdapter(hisAdabt);
             //Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
-
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //number.setText("555555");
+        if (requestCode == 1){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                number_his.add(number_his.size(),result);
+                savehis(dateSp.getSelectedItem().toString(),number_his);
+            }
+        }
+    }
 }
