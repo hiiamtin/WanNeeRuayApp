@@ -60,430 +60,444 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/mostnum"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="609dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:orientation="vertical"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <LinearLayout
-            android:id="@+id/rank1"
+            android:id="@+id/mostnum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:orientation="horizontal">
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-            <TextView
-                android:id="@+id/acadrank1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="แม่จำเนียร"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percentrank1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="36.50%"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/numrank1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:text="36   13   841"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/rank2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="หมูเซียน"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percentrank2"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/rank1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="29.54%"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:background="#FFC107"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/numrank2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:text="20    28"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/acadrank1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="แม่จำเนียร"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
-        <LinearLayout
-            android:id="@+id/rank3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="อาจารย์หนู"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/percentrank1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="36.50%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/percentrank3"
-                android:layout_width="wrap_content"
+                android:id="@+id/numrank1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="27.31%"
-                android:textAlignment="textEnd"
+                android:background="#FFC107"
+                android:text="36   13   841"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/numrank3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:text="25   83   522"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-
-        <LinearLayout
-            android:id="@+id/rank4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="เซียนฟันธง"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percentrank4"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/rank2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="25%"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:background="#FF9800"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/numrank4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:text="90   96   496"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/acadrank2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="หมูเซียน"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
-        <LinearLayout
-            android:id="@+id/rank5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="เลขนายดำ"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/percentrank2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="29.54%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/percentrank5"
-                android:layout_width="wrap_content"
+                android:id="@+id/numrank2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="23.25%"
-                android:textAlignment="textEnd"
+                android:background="#FF9800"
+                android:text="20    28"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/numrank5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:text="42   45   072"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/rank6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="เจ้าแม่ตะเคียนทอง"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percentrank6"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/rank3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="22.22%"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:background="#FFC107"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/numrank6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:text="23   32   253"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/acadrank3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="อาจารย์หนู"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
-
-        <LinearLayout
-            android:id="@+id/rank7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank7"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="ขวัญใจคนยาก"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/percentrank3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="27.31%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/percentrank7"
-                android:layout_width="wrap_content"
+                android:id="@+id/numrank3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="20.10%"
-                android:textAlignment="textEnd"
+                android:background="#FFC107"
+                android:text="25   83   522"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/numrank7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:text="12   32   072"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
 
-        <LinearLayout
-            android:id="@+id/rank8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank8"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="เลขมงคลชัย"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percentrank8"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/rank4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="20%"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:background="#FF9800"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/numrank8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:text="02   42   702"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/acadrank4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="เซียนฟันธง"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
-
-        <LinearLayout
-            android:id="@+id/rank9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank9"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="หลวงพ่อปากแดง"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/percentrank4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="25%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/percentrank9"
-                android:layout_width="wrap_content"
+                android:id="@+id/numrank4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="19.56%"
-                android:textAlignment="textEnd"
+                android:background="#FF9800"
+                android:text="90   96   496"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/numrank9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFC107"
-            android:text="68   82   089"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/rank10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/acadrank10"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="ม้าสีหมอก"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/percentrank10"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/rank5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:text="9.47%"
-                android:textAlignment="textEnd"
+                android:background="#FFC107"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/acadrank5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="เลขนายดำ"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/percentrank5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="23.25%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/numrank5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFC107"
+                android:text="42   45   072"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/rank6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/acadrank6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="เจ้าแม่ตะเคียนทอง"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/percentrank6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="22.22%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/numrank6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:text="23   32   253"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/rank7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFC107"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/acadrank7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="ขวัญใจคนยาก"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/percentrank7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="20.10%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/numrank7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFC107"
+                android:text="12   32   072"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/rank8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/acadrank8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="เลขมงคลชัย"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/percentrank8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="20%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/numrank8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:text="02   42   702"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/rank9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFC107"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/acadrank9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="หลวงพ่อปากแดง"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/percentrank9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="19.56%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/numrank9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFC107"
+                android:text="68   82   089"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/rank10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/acadrank10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="ม้าสีหมอก"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/percentrank10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="9.47%"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/numrank10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9800"
+                android:text="51    58"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/numrank10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:text="51    58"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+    </ScrollView>
 
-    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
