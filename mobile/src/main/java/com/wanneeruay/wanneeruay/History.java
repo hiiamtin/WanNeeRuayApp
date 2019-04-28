@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,6 +44,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
+
 
         hisList =findViewById(R.id.list_history);
         dateSp = findViewById(R.id.spinner_date_H);
@@ -111,10 +111,10 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
-                    number_his.add(number_his.size(),number.getText().toString());
-                    savehis(dateSp.getSelectedItem().toString(),number_his);
+                    ArrayList<String> text = number_his;
+                    text.add(number.getText().toString());
+                    savehis(dateSp.getSelectedItem().toString(),text);
                     number.setText("");
-                    //Toast.makeText(this,"OK",Toast.LENGTH_LONG ).show();
                 }else{
                     number.requestFocus();
                 }

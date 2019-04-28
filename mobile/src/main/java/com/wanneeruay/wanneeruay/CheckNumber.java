@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -143,14 +142,12 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         boolean[] reward = new boolean[9];
         if(s.equals(settext.get(0).getText().toString())){
             reward[0]=true;
-            //Toast.makeText(getApplicationContext(),"ถูกรางวัลที่ 1"+reward[0].toString(),Toast.LENGTH_LONG).show();
         }
         for (int i = 1; i < 6; i++) {
             String[] num = settext.get(i).getText().toString().split(" ");
             for (String s1 : num) {
                 if (s.equals(s1)) {
                     reward[i] = true;
-                    //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+i,Toast.LENGTH_LONG).show();
                     break;
                 }
             }
@@ -159,7 +156,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         for (String s1 : num) {
             if (s.substring(0, 3).equals(s1)) {
                 reward[6] = true;
-                //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+6,Toast.LENGTH_LONG).show();
                 break;
             }
         }
@@ -167,7 +163,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         for (String s1 : num) {
             if (s.substring(3).equals(s1)) {
                 reward[7] = true;
-                //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+7,Toast.LENGTH_LONG).show();
                 break;
             }
         }
@@ -175,7 +170,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         for (String s1 : num) {
             if (s.substring(4).equals(s1)) {
                 reward[8] = true;
-                //Toast.makeText(getApplicationContext(),"ถูกรางวัล"+" i="+8,Toast.LENGTH_LONG).show();
                 break;
             }
         }
