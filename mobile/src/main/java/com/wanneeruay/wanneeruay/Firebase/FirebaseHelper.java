@@ -64,14 +64,16 @@ public class FirebaseHelper {
 
     public ArrayList<Spacecraft> updateLottaryDB(){
         db2 = FB.getReference("lottary_db");
+        status = false;
         db2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData2(dataSnapshot,spacecraftDB);
+                status = true;
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {spacecraftDB.clear();}
+            public void onCancelled(@NonNull DatabaseError databaseError) {spacecraftDB.clear(); status=false;}
         });
         return spacecraftDB;
     }
@@ -99,27 +101,7 @@ public class FirebaseHelper {
         }
     }
 
-    public boolean checkConnection() {
-        DatabaseReference connectedRef = FB.getReference(".info/connected");
-        connectedRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                boolean connected = snapshot.getValue(Boolean.class);
-                if (connected) {
-                    System.out.println("connected");
-                    status = true;
-                } else {
-                    System.out.println("not connected");
-                    status = false;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                System.err.println("Listener was cancelled");
-                status = true;
-            }
-        });
+    public boolean isStatus() {
         return status;
     }
 }

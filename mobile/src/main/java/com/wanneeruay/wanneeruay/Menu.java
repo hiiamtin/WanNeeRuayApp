@@ -37,7 +37,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         final Button btLektaided = findViewById(R.id.bt_lektaided);
         final Button btStatistic = findViewById(R.id.bt_statistic);
         helper = new FirebaseHelper(FirebaseDatabase.getInstance());
-        boolean check = helper.checkConnection();
+        boolean check = helper.isStatus();
         Toast.makeText(this,String.valueOf(check),Toast.LENGTH_SHORT).show();
         loadDate();
         loadDB();
