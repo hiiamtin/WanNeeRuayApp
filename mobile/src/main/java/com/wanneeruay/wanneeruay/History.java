@@ -35,7 +35,6 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     static ArrayList<String> number_his = new ArrayList<String>();
     static Spinner dateSp;
     static ListView hisList ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +81,14 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                         .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                number_his.remove(position);
+                                String temp = number_his.get(position);
+                                for (int i = number_his.size()-1; i > 0 ;i--){
+                                    if (number_his.get(i).equals(temp)){
+                                        number_his.remove(i);
+                                        break;
+                                    }
+                                }
+
                                 savehis(dateSp.getSelectedItem().toString(),number_his);
                                 dialog.cancel();
                             }
@@ -199,14 +205,30 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         number_his = gson.fromJson(json,type);
         ArrayList<String> text = new ArrayList<String>();
         if((number_his == null) || (number_his.toString().equals("[]") )){
-            // Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
             hisList.setVisibility(View.INVISIBLE);
             number_his = new ArrayList<String>();
         }
         else{
+            ArrayList<String> number_his2 = new ArrayList<String>();
+            number_his2.addAll(number_his);
+            for(int i = 0;i < number_his2.size();i++)
+            {
+                int  count =1;;
+                String temp = number_his2.get(i);
+                text.add(text.size(),temp);
+                for(int h =i+1; h < number_his2.size();h++){
+                    if(temp.equals(number_his2.get(h))){
+                        number_his2.remove(h);
+                        count +=1;
+                        h-=1;
+                    }
+                }
+                text.set(i,text.get(i)+"                                                        "+Integer.toString(count)+"ใบ");
+            }
             //Toast.makeText(this, number_his.toString(), Toast.LENGTH_LONG).show();
             hisList.setVisibility(View.VISIBLE);
-            ArrayAdapter hisAdabt = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,number_his);
+            ArrayAdapter hisAdabt = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,text);
             hisList.setAdapter(hisAdabt);
             //Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
         }
@@ -219,7 +241,22 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         if (requestCode == 1){
             if(resultCode == RESULT_OK){
                 String result = data.getStringExtra("result");
-                number_his.add(number_his.size(),result);
+                if (result.length() == 15){
+                String lot_num  = "";
+                String lot_time = "";
+                lot_num = lot_num + result.substring(9);
+                lot_time += result.substring(3,5);
+                int lot_number = Integer.parseInt(lot_time);
+                for (int i = 19 ; i !=lot_number ;i-- ) {
+                    int index = dateSp.getSelectedItemPosition() + 1;
+                    dateSp.setSelection(index);
+                    loadhis(dateSp.getSelectedItem().toString());
+                }
+                    number_his.add(number_his.size(),lot_num);
+               }
+            else {
+                    Toast.makeText(this,"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+                 }
                 savehis(dateSp.getSelectedItem().toString(),number_his);
             }
         }

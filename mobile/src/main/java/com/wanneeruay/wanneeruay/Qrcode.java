@@ -152,6 +152,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Camsurface :
+
                 //camera.setParameters(params);
         }
     }
