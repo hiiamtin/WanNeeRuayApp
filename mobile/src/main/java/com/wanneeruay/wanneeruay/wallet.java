@@ -89,7 +89,7 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         loadwal();
     }
    public void loadwal(){
-        SharedPreferences sharedPreferences = getSharedPreferences("Wallet", this.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("Wallet", Menu.MODE_PRIVATE);
         int buy = sharedPreferences.getInt("ซื้อ",0);
         int bet = sharedPreferences.getInt("ถูก",0);
         int all =  bet-buy;
@@ -98,7 +98,7 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         proall.setText(Integer.toString(bet));
     }
     public void clearwallet(){
-        SharedPreferences clear = getSharedPreferences("Wallet", this.MODE_PRIVATE);
+        SharedPreferences clear = getSharedPreferences("Wallet", Menu.MODE_PRIVATE);
         SharedPreferences.Editor editor = clear.edit();
         editor.putInt("ซื้อ",0);
         editor.apply();
