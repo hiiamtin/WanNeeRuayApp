@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FirebaseHelper {
 
@@ -62,6 +63,7 @@ public class FirebaseHelper {
                     loadDate(context);
                 }else{
                     Toast.makeText(context,"Date loaded",Toast.LENGTH_SHORT).show();
+                    Collections.reverse(spacecrafts);
                     savedDate(context);
                 }
                 al.cancel();
@@ -85,14 +87,15 @@ public class FirebaseHelper {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData2(dataSnapshot,spacecraftDB);
                 status = true;
-                al.cancel();
                 if(spacecraftDB.isEmpty()){
                     Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
                     loadDB(context);
                 }else{
                     Toast.makeText(context,"DB loaded",Toast.LENGTH_SHORT).show();
+                    Collections.reverse(spacecraftDB);
                     savedDB(context);
                 }
+                al.cancel();
             }
 
             @Override

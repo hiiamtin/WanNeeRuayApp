@@ -183,7 +183,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         toast.show();
     }
     public void savehis(String key,ArrayList<String> data ){
-        SharedPreferences sp = getSharedPreferences("History_number", this.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
         String json = gson.toJson(data);
@@ -192,7 +192,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         loadhis(dateSp.getSelectedItem().toString());
     }
     public void loadhis(String key){
-        SharedPreferences sharedPreferences = getSharedPreferences("History_number", this.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();

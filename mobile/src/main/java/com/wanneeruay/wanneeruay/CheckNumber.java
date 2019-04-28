@@ -3,6 +3,7 @@ package com.wanneeruay.wanneeruay;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.constraint.ConstraintLayout;
@@ -18,7 +19,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,6 +35,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     ArrayList<Spacecraft> lottary_data=Menu.lottary_data;
     static String readQr;
     ArrayList<TextView> settext = new ArrayList<>();
+    Spinner dateSp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +46,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         number = findViewById(R.id.text_input_numberC);
         final Button btConferm = findViewById(R.id.bt_confermC);
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
-        final Spinner dateSp = findViewById(R.id.spinner_date);
         final Button butQr2 = findViewById(R.id.QrbutC);
+        dateSp = findViewById(R.id.spinner_date);
+
         settext.add(findViewById(R.id.awardnum1));
         settext.add(findViewById(R.id.nearnum1));
         settext.add(findViewById(R.id.awardnum2));
@@ -78,7 +86,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
                     popupSaveHistory(checkNumberReward());
-                    number.setText("");
+
                 }else{
                     number.requestFocus();
                 }
@@ -217,10 +225,13 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }else{
             builder.setMessage(s+"\nบันทึกลงในประวัติ?");
             builder.setPositiveButton("บันทึก", (dialog, id) -> {
-
+                ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
+                text.add(number.getText().toString());
+                savehis(String.valueOf(dateSp.getSelectedItemPosition()),text);
+                number.setText("");
             });
             builder.setNegativeButton("ไม่", (dialog, id) -> {
-                // Do something
+                number.setText("");
             });
         }
         AlertDialog dialog = builder.create();
@@ -232,4 +243,27 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return data;
     }
+
+    public void savehis(String key,ArrayList<String> data ){
+        SharedPreferences sp = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        editor.putString(key,json);
+        editor.apply();
+    }
+
+    public ArrayList<String> loadhis(String key){
+        ArrayList<String> value;
+        SharedPreferences sharedPreferences = getSharedPreferences("History_number", Menu.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(key,null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        value = gson.fromJson(json,type);
+        if((value == null) || (value.toString().equals("[]") )){
+            value = new ArrayList<>();
+        }
+        return value;
+    }
+
 }
