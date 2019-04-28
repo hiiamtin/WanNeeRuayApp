@@ -31,7 +31,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     static EditText number;
     static ArrayList<String> date=Menu.date;
     static String readQr;
-    static ArrayList<String> number_his;
+    static ArrayList<String> number_his= new ArrayList<>();;
     static Spinner dateSp;
     static ListView hisList ;
 
@@ -44,7 +44,6 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
-        number_his = new ArrayList<>();
 
         hisList =findViewById(R.id.list_history);
         dateSp = findViewById(R.id.spinner_date_H);

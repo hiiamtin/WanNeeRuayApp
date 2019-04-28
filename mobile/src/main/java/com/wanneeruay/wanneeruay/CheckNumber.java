@@ -122,7 +122,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
+        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
         Spacecraft group = lottary_data.get(parent.getSelectedItemPosition());
         ArrayList<ArrayList<String>> type = group.getValue();
         for (int i = 0; i < 9; i++) {
@@ -216,7 +216,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             builder.setMessage(s);
         }else{
             builder.setMessage(s+"\nบันทึกลงในประวัติ?");
-            builder.setPositiveButton("บันทึก", (dialog, id) -> {});
+            builder.setPositiveButton("บันทึก", (dialog, id) -> {
+
+            });
             builder.setNegativeButton("ไม่", (dialog, id) -> {
                 // Do something
             });

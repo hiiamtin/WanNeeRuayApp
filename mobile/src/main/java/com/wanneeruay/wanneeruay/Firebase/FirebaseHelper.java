@@ -21,6 +21,7 @@ public class FirebaseHelper {
     ArrayList<String> spacecrafts;
     ArrayList<Spacecraft> spacecraftDB = new ArrayList<>();
     FirebaseDatabase FB;
+    boolean status=false;
 
     public FirebaseHelper(FirebaseDatabase FB) {
         this.FB = FB;
@@ -55,7 +56,7 @@ public class FirebaseHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                spacecrafts.clear();
+                spacecrafts=null;
             }
         });
         return spacecrafts;
@@ -96,5 +97,29 @@ public class FirebaseHelper {
             }
             sp.add(x);
         }
+    }
+
+    public boolean checkConnection() {
+        DatabaseReference connectedRef = FB.getReference(".info/connected");
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                boolean connected = snapshot.getValue(Boolean.class);
+                if (connected) {
+                    System.out.println("connected");
+                    status = true;
+                } else {
+                    System.out.println("not connected");
+                    status = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.err.println("Listener was cancelled");
+                status = true;
+            }
+        });
+        return status;
     }
 }
