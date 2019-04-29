@@ -2,6 +2,7 @@ package com.wanneeruay.wanneeruay;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -77,7 +78,7 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
     }
     public void savewal(String key,int data){
         int before =0;
-        SharedPreferences sp = getSharedPreferences("Wallet", this.MODE_PRIVATE);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (key.equals("ซื้อ")){
              before = sp.getInt("ซื้อ",0);}
         if (key.equals("ถูก")){
@@ -89,7 +90,7 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         loadwal();
     }
    public void loadwal(){
-        SharedPreferences sharedPreferences = getSharedPreferences("Wallet", Menu.MODE_PRIVATE);
+       SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         int buy = sharedPreferences.getInt("ซื้อ",0);
         int bet = sharedPreferences.getInt("ถูก",0);
         int all =  bet-buy;

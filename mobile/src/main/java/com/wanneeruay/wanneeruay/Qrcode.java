@@ -47,6 +47,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         surfaceView = (SurfaceView) findViewById(R.id.Camsurface);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
         textView = (TextView) findViewById(R.id.Qrstr);
+        textView.setOnClickListener(this); //test
         cameraSource = new CameraSource.Builder(this,barcodeDetector).setRequestedPreviewSize(640,480).build();
         surfaceView.setOnClickListener(this);
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -98,12 +99,18 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                         public void run() {
 
                             if (stop == true) {
-
                                 textView.setText(qrCodes.valueAt(0).displayValue);
-                                 History.readQr = (String) textView.getText();
+                                if(textView.getText().toString().length() != 15){
+                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+                                    Intent resultIntent = new Intent();
+                                    setResult(RESULT_CANCELED,resultIntent);
+                                    finish();
+                                }
+                                String text = textView.getText().toString().substring(9);
+                                History.readQr = (String) textView.getText();
                                 CheckNumber.readQr = (String) textView.getText();
                                 AlertDialog.Builder altdial = new AlertDialog.Builder(Qrcode.this);
-                                altdial.setMessage("คุณต้องการบันทึกเลขนี้ไว้หรือไม่?");
+                                altdial.setMessage(text+"\nใช่เลขที่คุณต้องการหรือไม่?");
                                 altdial.setCancelable(false);
                                 altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
                                     @Override
@@ -151,8 +158,40 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.Camsurface :
-
+            case R.id.Qrstr :
+                textView.setText("62-18-01-570331");
+                String text = textView.getText().toString().substring(9);
+                History.readQr = (String) textView.getText();
+                CheckNumber.readQr = (String) textView.getText();
+                AlertDialog.Builder altdial = new AlertDialog.Builder(Qrcode.this);
+                altdial.setMessage(text+"\nใช่เลขที่คุณต้องการหรือไม่?");
+                altdial.setCancelable(false);
+                altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("result",textView.getText());
+                        setResult(RESULT_CANCELED,resultIntent);
+                        finish();
+                    }
+                });
+                altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("result",textView.getText());
+                        setResult(RESULT_OK,resultIntent);
+                        //History.number.setText(History.readQr);
+                        //History.number_his.add(History.number_his.size(), History.readQr);
+                        //History saveH = null;
+                        //History.savehis(History.dateSp.getSelectedItem().toString(), History.number_his);
+                        finish();
+                    }
+                });
+                AlertDialog alert = altdial.create();
+                alert.setTitle("Record");
+                alert.show();
+                stop = false;
                 //camera.setParameters(params);
         }
     }

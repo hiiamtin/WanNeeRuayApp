@@ -38,7 +38,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     static String readQr;
     ArrayList<TextView> settext = new ArrayList<>();
     Spinner dateSp;
-
+    int rewardPrice = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +87,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 checkErrorTextInput(v);
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
-                    popupSaveHistory(checkNumberReward());
+                    checkNumberReward(number.getText().toString());
 
                 }else{
                     number.requestFocus();
@@ -98,7 +98,8 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 hideSoftKeyboard(v);
                 break;
             case R.id.QrbutC:
-                startActivity(new Intent(this, Qrcode.class));
+                Intent intent = new Intent(CheckNumber.this,Qrcode.class);
+                startActivityForResult(intent,1);
                 break;
         }
     }
@@ -118,7 +119,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             }
         }
     }
-
     public void showKeyboard(View view){
         InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
@@ -147,8 +147,8 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    private String checkNumberReward(){
-        String s = number.getText().toString();
+    private String checkNumberReward(String s){
+        //String s = number.getText().toString();
         boolean[] reward = new boolean[9];
         if(s.equals(settext.get(0).getText().toString())){
             reward[0]=true;
@@ -189,33 +189,63 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 switch (i){
                     case 0:
                         x="ถูกรางวัลที่1";
+                        rewardPrice = 6000000;
                         break;
                     case 1:
                         x="ถูกรางวัลข้างเคียงที่1";
+                        rewardPrice = 100000;
                         break;
                     case 2:
                         x="ถูกรางวัลที่2";
+                        rewardPrice = 200000;
                         break;
                     case 3:
                         x="ถูกรางวัลที่3";
+                        rewardPrice = 80000;
                         break;
                     case 4:
                         x="ถูกรางวัลที่4";
+                        rewardPrice = 40000;
                         break;
                     case 5:
                         x="ถูกรางวัลที่5";
+                        rewardPrice = 20000;
                         break;
                     case 6:
                         x="ถูกรางวัล3ตัวหน้า";
+                        rewardPrice = 4000;
                         break;
                     case 7:
                         x="ถูกรางวัล3ตัวท้าย";
+                        rewardPrice = 4000;
                     case 8:
                         x="ถูกรางวัล2ตัวท้าย";
+                        rewardPrice = 2000;
                         break;
                 }
             }
         }
+     //   return x;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        if(x.equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+            builder.setMessage(x);
+        }else{
+            builder.setMessage(x+"\nบันทึกลงในประวัติ?");
+            builder.setNegativeButton("ไม่", (dialog, id) -> {
+                number.setText("");
+            });
+            builder.setPositiveButton("บันทึก", (dialog, id) -> {
+                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
+                ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
+                text.add(s);
+                savehis(dateSp.getSelectedItem().toString(),text);
+                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
+                number.setText("");
+            });
+        }
+        AlertDialog dialog = builder.create();
+        dialog.show();
         return x;
     }
 
@@ -226,6 +256,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             builder.setMessage(s);
         }else{
             builder.setMessage(s+"\nบันทึกลงในประวัติ?");
+            builder.setNegativeButton("ไม่", (dialog, id) -> {
+                number.setText("");
+            });
             builder.setPositiveButton("บันทึก", (dialog, id) -> {
                 Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
@@ -234,9 +267,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 number.setText("");
             });
-            builder.setNegativeButton("ไม่", (dialog, id) -> {
-                number.setText("");
-            });
+
         }
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -255,6 +286,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         String json = gson.toJson(data);
         editor.putString(key,json);
         editor.apply();
+        savewal("ถูก",rewardPrice);
     }
 
     public ArrayList<String> loadhis(String key){
@@ -269,5 +301,50 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }
         return value;
     }
+    public void savewal(String key,int data){
+        int before =0;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (key.equals("ซื้อ")){
+            before = sp.getInt("ซื้อ",0);}
+        if (key.equals("ถูก")){
+            before = sp.getInt("ถูก",0);}
+        data = data + before ;
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(key,data);
+        editor.apply();
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //number.setText("555555");
+        ArrayList<String> number_his=loadhis("16 เมษายน 2562");
+        Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
+        if (requestCode == 1){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                if (result.length() == 15){
+                    String lot_num  = "";
+                    String lot_time = "";
+                    lot_num += result.substring(9);
+                    lot_time += result.substring(3,5);
+                 /*   int lot_number = Integer.parseInt(lot_time);
+                    for (int i = 19 ; i !=lot_number ;i-- ) {
+                        int index = dateSp.getSelectedItemPosition() + 1;
+                        dateSp.setSelection(index);
+                        loadhis(dateSp.getSelectedItem().toString());
+                    }*/
+                    if(lot_num.length() != 6){
+                        return;
+                    }
+                    checkNumberReward(lot_num);
+                }
+                else {
+                    Toast.makeText(this,"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
 }
+
+
