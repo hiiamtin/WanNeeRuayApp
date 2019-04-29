@@ -99,13 +99,12 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                         public void run() {
 
                             if (stop == true) {
-                                textView.setText(qrCodes.valueAt(0).displayValue);
-                                if(textView.getText().toString().length() != 15){
+
+                                if(qrCodes.valueAt(0).displayValue.length() != 15){
                                     Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
-                                    Intent resultIntent = new Intent();
-                                    setResult(RESULT_CANCELED,resultIntent);
-                                    finish();
+                                    return;
                                 }
+                                textView.setText(qrCodes.valueAt(0).displayValue);
                                 String text = textView.getText().toString().substring(9);
                                 History.readQr = (String) textView.getText();
                                 CheckNumber.readQr = (String) textView.getText();
@@ -115,10 +114,8 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent resultIntent = new Intent();
-                                        resultIntent.putExtra("result",textView.getText());
-                                        setResult(RESULT_CANCELED,resultIntent);
-                                        finish();
+                                        stop = true;
+                                        return;
                                     }
                                 });
                                 altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
@@ -169,10 +166,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra("result",textView.getText());
-                        setResult(RESULT_CANCELED,resultIntent);
-                        finish();
+                        return;
                     }
                 });
                 altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
@@ -191,7 +185,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 AlertDialog alert = altdial.create();
                 alert.setTitle("Record");
                 alert.show();
-                stop = false;
                 //camera.setParameters(params);
         }
     }
