@@ -102,7 +102,9 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
 
                                 if(qrCodes.valueAt(0).displayValue.length() != 15){
                                     Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
-                                    return;
+                                    Intent resultIntent = new Intent();
+                                    setResult(RESULT_CANCELED,resultIntent);
+                                    finish();
                                 }
                                 textView.setText(qrCodes.valueAt(0).displayValue);
                                 String text = textView.getText().toString().substring(9);
