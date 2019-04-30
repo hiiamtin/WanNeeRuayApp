@@ -6,8 +6,12 @@
     <uses-feature
         android:name="android.hardware.sensor.accelrometer"
         android:required="true" />
-     <uses-feature android:name="android.hardware.Camera"
-         android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="true" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>

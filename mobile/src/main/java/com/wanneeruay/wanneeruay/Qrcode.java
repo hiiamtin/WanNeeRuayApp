@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraManager;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -29,15 +30,14 @@ import java.io.IOException;
 import java.lang.reflect.Parameter;
 
 public class Qrcode extends AppCompatActivity implements View.OnClickListener {
-
-
+    
     SurfaceView surfaceView;
     CameraSource cameraSource;
     BarcodeDetector barcodeDetector;
     static TextView textView;
     static String Qrtext;
-    Camera.Parameters params;
-    Camera camera = Camera.open();
+    CameraManager cameraManager;
+
     //android.graphics.Camera cam;
     boolean stop = true;
     @Override
@@ -48,16 +48,11 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
         textView = (TextView) findViewById(R.id.Qrstr);
         textView.setOnClickListener(this); //test
-        cameraSource = new CameraSource.Builder(this,barcodeDetector).setRequestedPreviewSize(640,480).build();
+        cameraSource = new CameraSource.Builder(this,barcodeDetector).setRequestedPreviewSize(640,480).setAutoFocusEnabled(true).build();
         surfaceView.setOnClickListener(this);
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                params = camera.getParameters();
-                if (params.getSupportedFocusModes().contains(
-                        android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
-                    params.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-                }
 
                 if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                     return;
@@ -139,10 +134,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 stop = false;
                             }
 
-                           // Toast toast = Toast.makeText(getApplicationContext(),History.readQr ,Toast.LENGTH_LONG);
-                           // toast.setGravity(0,0,0);
-                           // toast.show();
-
                         }
                     });
                 }
@@ -188,6 +179,9 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 alert.setTitle("Record");
                 alert.show();
                 //camera.setParameters(params);
+            case R.id.Camsurface:
+                ;
+
         }
     }
 }
