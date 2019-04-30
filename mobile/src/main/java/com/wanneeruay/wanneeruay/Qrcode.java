@@ -102,6 +102,32 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                     finish();
                                 }
                                 textView.setText(qrCodes.valueAt(0).displayValue);
+                                String result = textView.getText().toString();
+                                String lot_year = result.substring(0,2);
+
+                                if(result.substring(2,3).equals("-")== false){
+                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if(result.substring(5,6).equals("-")== false){
+                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                if(result.substring(8,9).equals("-")== false){
+                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                int[] Checktextqr = {0,1,2,3,4,6,7,9,10,11,12,13,14};
+                                for(int i =0; i < Checktextqr.length;i++){
+                                    if (result.charAt(Checktextqr[i]) < '0' ||result.charAt(Checktextqr[i]) >'9'){
+                                        Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+                                }
+                                if (lot_year.equals("62") == false && lot_year.equals("61") == false){
+                                    Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
                                 String text = textView.getText().toString().substring(9);
                                 History.readQr = (String) textView.getText();
                                 CheckNumber.readQr = (String) textView.getText();
@@ -121,10 +147,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                         Intent resultIntent = new Intent();
                                         resultIntent.putExtra("result",textView.getText());
                                         setResult(RESULT_OK,resultIntent);
-                                        //History.number.setText(History.readQr);
-                                        //History.number_his.add(History.number_his.size(), History.readQr);
-                                        //History saveH = null;
-                                        //History.savehis(History.dateSp.getSelectedItem().toString(), History.number_his);
                                         finish();
                                     }
                                 });
@@ -149,8 +171,33 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Qrstr :
-                textView.setText("62-12-01-570331");
+                textView.setText("61-12-01-724628");
                 String text = textView.getText().toString().substring(9);
+                String result = textView.getText().toString();
+                String lot_year = result.substring(0,2);
+                if(result.substring(2,3).equals("-")== false){
+                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(result.substring(5,6).equals("-")== false){
+                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(result.substring(8,9).equals("-")== false){
+                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                int[] Checktextqr = {0,1,3,4,6,7,9,10,11,12,13,14};
+                for(int i =0; i < Checktextqr.length;i++){
+                    if (result.charAt(Checktextqr[i]) < '0' ||result.charAt(Checktextqr[i]) >'9'){
+                        Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่+", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+                if (lot_year.equals("62") == false && lot_year.equals("61") == false){
+                    Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 History.readQr = (String) textView.getText();
                 CheckNumber.readQr = (String) textView.getText();
                 AlertDialog.Builder altdial = new AlertDialog.Builder(Qrcode.this);
@@ -168,10 +215,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("result",textView.getText());
                         setResult(RESULT_OK,resultIntent);
-                        //History.number.setText(History.readQr);
-                        //History.number_his.add(History.number_his.size(), History.readQr);
-                        //History saveH = null;
-                        //History.savehis(History.dateSp.getSelectedItem().toString(), History.number_his);
                         finish();
                     }
                 });

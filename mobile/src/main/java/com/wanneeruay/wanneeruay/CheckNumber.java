@@ -329,31 +329,17 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                     String lot_time = "";
                     lot_num += result.substring(9);
                     lot_time += result.substring(3,5);
-
                     String lot_year = result.substring(0,2);
-                    if (lot_year.equals("62") == false){
-                        Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if(result.substring(2,3).equals("-")){
-                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if(result.substring(5,6).equals("-")){
-                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if(result.substring(8,9).equals("-")){
-                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
-                        return;
-                    }
                     int lot_number = (Integer.parseInt(lot_time)+1)/2;
+                    if (Integer.parseInt(lot_year) == 61){
+                        lot_number -= 24;
+                    }
                     while (currentDate != lot_number) {
                         if (currentDate > lot_number) {
                             int index = dateSp.getSelectedItemPosition() + 1;
                             if (index >= dateSp.getAdapter().getCount()){
                                 Toast.makeText(this,"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
-                                break;
+                                return;
                             }
                             dateSp.setSelection(index);
                             currentDate -=1;
@@ -362,7 +348,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                             int index = dateSp.getSelectedItemPosition() - 1;
                             if (index< 0){
                                 Toast.makeText(this,"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
-                                break;
+                                return;
                             }
                             dateSp.setSelection(index);
                             currentDate +=1;

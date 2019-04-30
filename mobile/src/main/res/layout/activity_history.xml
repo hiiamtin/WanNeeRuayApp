@@ -130,7 +130,7 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/clear_bt"
+                android:id="@+id/check_bt"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

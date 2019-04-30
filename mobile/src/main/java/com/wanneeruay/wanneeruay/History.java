@@ -47,6 +47,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
+        final Button checkB = findViewById(R.id.check_bt);
+        checkB.setOnClickListener(this);
         hisList =findViewById(R.id.list_history);
         dateSp = findViewById(R.id.spinner_date_H);
         dateSp.setAdapter(updateSpiner());
@@ -126,6 +128,11 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
             case R.id.manage_money_bt:
                 startActivity(new Intent(this, wallet.class));
                 break;
+            case R.id.check_bt:
+                Intent intent2 = new Intent(History.this,CheckNumber.class);
+                startActivityForResult(intent2,1);
+                break;
+
         }
     }
     public void checkErrorTextInput(View v){
@@ -244,26 +251,13 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 if (result.length() == 15){
                 String lot_num  = "";
                 String lot_time = "";
-                lot_num = lot_num + result.substring(9);
+                lot_num += result.substring(9);
                 lot_time += result.substring(3,5);
                 String lot_year = result.substring(0,2);
-                if (lot_year.equals("62") == false){
-                    Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                    if(result.substring(2,3).equals("-" )== false){
-                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if(result.substring(5,6).equals("-")== false){
-                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if(result.substring(8,9).equals("-")== false){
-                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
-                        return;
-                    }
                 int lot_number = (Integer.parseInt(lot_time)+1)/2;
+                    if (Integer.parseInt(lot_year) <62){
+                        lot_number -= 24*(62-Integer.parseInt(lot_year));
+                    }
                 while (currentDate != lot_number) {
                     if (currentDate > lot_number) {
                         int index = dateSp.getSelectedItemPosition() + 1;
