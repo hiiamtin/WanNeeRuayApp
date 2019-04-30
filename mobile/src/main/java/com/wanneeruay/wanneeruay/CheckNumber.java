@@ -39,6 +39,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     ArrayList<TextView> settext = new ArrayList<>();
     Spinner dateSp;
     int rewardPrice = 0;
+    int currentDate = 8;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Button butQr2 = findViewById(R.id.QrbutC);
         dateSp = findViewById(R.id.spinner_date);
-
         settext.add(findViewById(R.id.awardnum1));
         settext.add(findViewById(R.id.nearnum1));
         settext.add(findViewById(R.id.awardnum2));
@@ -140,6 +140,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             settext.get(i).setText(type.get(i).toString()
                     .replace("[", "").replace("]", "").replace(",",""));
         }
+        currentDate = 8- dateSp.getSelectedItemPosition();
     }
 
     @Override
@@ -328,14 +329,41 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                     String lot_time = "";
                     lot_num += result.substring(9);
                     lot_time += result.substring(3,5);
-                 /*   int lot_number = Integer.parseInt(lot_time);
-                    for (int i = 19 ; i !=lot_number ;i-- ) {
-                        int index = dateSp.getSelectedItemPosition() + 1;
-                        dateSp.setSelection(index);
-                        loadhis(dateSp.getSelectedItem().toString());
-                    }*/
+                    int lot_number = (Integer.parseInt(lot_time)+1)/2;
+                    String lot_year = result.substring(0,2);
+                    if (lot_year.equals("62") == false){
+                        Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    while (currentDate != lot_number) {
+                        if (currentDate > lot_number) {
+                            int index = dateSp.getSelectedItemPosition() + 1;
+                            if (index >= dateSp.getAdapter().getCount()){
+                                Toast.makeText(this,"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
+                                break;
+                            }
+                            dateSp.setSelection(index);
+                            currentDate -=1;
+                        }
+                        else{
+                            int index = dateSp.getSelectedItemPosition() - 1;
+                            if (index< 0){
+                                Toast.makeText(this,"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
+                                break;
+                            }
+                            dateSp.setSelection(index);
+                            currentDate +=1;
+                        }
+                    }
                     if(lot_num.length() != 6){
                         return;
+                    }
+                    Spacecraft group = lottary_data.get(dateSp.getSelectedItemPosition());
+                    ArrayList<ArrayList<String>> type = group.getValue();
+                    for (int i = 0; i < 9; i++) {
+                        Collections.sort(type.get(i));
+                        settext.get(i).setText(type.get(i).toString()
+                                .replace("[", "").replace("]", "").replace(",",""));
                     }
                     checkNumberReward(lot_num);
                 }

@@ -37,6 +37,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     static ArrayList<String> number_his = new ArrayList<String>();
     static Spinner dateSp;
     static ListView hisList ;
+    int currentDate = 8;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +47,16 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         final ConstraintLayout ct = findViewById(R.id.constraintLayout);
         final Button btMoney = findViewById(R.id.manage_money_bt);
         final Button btQr = findViewById(R.id.Qrbut);
-
         hisList =findViewById(R.id.list_history);
         dateSp = findViewById(R.id.spinner_date_H);
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
-
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
         btConferm.setOnClickListener(this);
         btMoney.setOnClickListener(this);
         ct.setOnClickListener(this);
         btQr.setOnClickListener(this);
-
         number.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus) {
                 checkErrorTextInput(v);
@@ -155,8 +153,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         if(number_his.toString().equals("[]") ){
             Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
         }
+        currentDate = 8- dateSp.getSelectedItemPosition();
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -248,12 +246,33 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 String lot_time = "";
                 lot_num = lot_num + result.substring(9);
                 lot_time += result.substring(3,5);
-                int lot_number = Integer.parseInt(lot_time);
-                for (int i = 19 ; i !=lot_number ;i-- ) {
-                    int index = dateSp.getSelectedItemPosition() + 1;
-                    dateSp.setSelection(index);
-                    loadhis(dateSp.getSelectedItem().toString());
+                String lot_year = result.substring(0,2);
+                if (lot_year.equals("62") == false){
+                    Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                    return;
                 }
+                int lot_number = (Integer.parseInt(lot_time)+1)/2;
+                while (currentDate != lot_number) {
+                    if (currentDate > lot_number) {
+                        int index = dateSp.getSelectedItemPosition() + 1;
+                        if (index >= dateSp.getAdapter().getCount()){
+                            Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                        dateSp.setSelection(index);
+                        currentDate -=1;
+                    }
+                    else{
+                        int index = dateSp.getSelectedItemPosition() - 1;
+                        if (index< 0){
+                            Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                        dateSp.setSelection(index);
+                        currentDate +=1;
+                    }
+                }
+                    loadhis(dateSp.getSelectedItem().toString());
                     number_his.add(number_his.size(),lot_num);
                }
             else {

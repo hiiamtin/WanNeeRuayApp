@@ -149,7 +149,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Qrstr :
-                textView.setText("62-18-01-570331");
+                textView.setText("62-12-01-570331");
                 String text = textView.getText().toString().substring(9);
                 History.readQr = (String) textView.getText();
                 CheckNumber.readQr = (String) textView.getText();
@@ -178,10 +178,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 AlertDialog alert = altdial.create();
                 alert.setTitle("Record");
                 alert.show();
-                //camera.setParameters(params);
-            case R.id.Camsurface:
-                ;
-
         }
     }
 }
