@@ -251,6 +251,18 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                     Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
                     return;
                 }
+                    if(result.substring(2,3).equals("-" )== false){
+                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(result.substring(5,6).equals("-")== false){
+                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(result.substring(8,9).equals("-")== false){
+                        Toast.makeText(this,"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                 int lot_number = (Integer.parseInt(lot_time)+1)/2;
                 while (currentDate != lot_number) {
                     if (currentDate > lot_number) {
