@@ -1,14 +1,17 @@
 package com.wanneeruay.wanneeruay;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.wanneeruay.wanneeruay.Firebase.FirebaseHelper;
@@ -35,7 +38,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         final Button btStatistic = findViewById(R.id.bt_statistic);
         context = this;
         date_new = findViewById(R.id.date_text_main);
-
+        permiss();
         helper = new FirebaseHelper(FirebaseDatabase.getInstance());
         btRandom.setOnClickListener(this);
         btCheck.setOnClickListener(this);
@@ -61,7 +64,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
             case R.id.bt_check:
                 startActivity(new Intent(this, CheckNumber.class));
                 break;
-
 
             case R.id.bt_history:
                 startActivity(new Intent(this, History.class));
@@ -99,6 +101,14 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
 
     public static void setLottary_data(ArrayList<Spacecraft> lottary_data) {
         Menu.lottary_data = lottary_data;
+    }
+
+    private void permiss(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+            }
+        }
     }
 
 }
