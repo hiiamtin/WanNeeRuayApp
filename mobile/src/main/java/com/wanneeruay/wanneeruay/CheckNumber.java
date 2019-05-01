@@ -1,6 +1,7 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -22,6 +23,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
 
 import java.lang.reflect.Type;
@@ -38,6 +41,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     Spinner dateSp;
     int rewardPrice = 0;
     int currentDate = date.size() +1 ;
+    final Activity activity = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +94,13 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 hideSoftKeyboard(v);
                 break;
             case R.id.QrbutC:
-                Intent intent = new Intent(CheckNumber.this,Qrcode.class);
-                startActivityForResult(intent,1);
+                IntentIntegrator integrator = new IntentIntegrator(activity);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.DATA_MATRIX_TYPES);
+                integrator.setPrompt("Scan");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.initiateScan();
                 break;
         }
     }
@@ -329,9 +338,57 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            if(resultCode == RESULT_OK){
-                String result = data.getStringExtra("result");
+        IntentResult result2 = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        String result = result2.toString();
+        if(result.length() != 15){
+
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+            Intent resultIntent = new Intent();
+            setResult(RESULT_CANCELED,resultIntent);
+            return;
+        }
+        String lot_year = result.substring(0,2);
+        String lot_time = "";
+        lot_time += result.substring(3,5);
+        if(result.charAt(2) != '-'){
+            Toast.makeText(getApplicationContext(),"2", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(result.charAt(5) != '-'){
+            Toast.makeText(getApplicationContext(),"5", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(result.charAt(8) != '-'){
+            Toast.makeText(getApplicationContext(),"8", Toast.LENGTH_LONG).show();
+            return;
+        }
+        int[] Checktextqr = {0,1,3,4,6,7,9,10,11,12,13,14};
+        for(int i =0; i < Checktextqr.length;i++){
+            if (result.charAt(Checktextqr[i]) < '0' ||result.charAt(Checktextqr[i]) >'9'){
+                Toast.makeText(getApplicationContext(),Checktextqr[i], Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        if (!lot_year.equals("62") && !lot_year.equals("61")){
+            Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (Integer.parseInt(lot_time) > 48 ||Integer.parseInt(lot_time) == 0){
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่+", Toast.LENGTH_LONG).show();
+            return;
+        }
+        String text = result.substring(9);
+        android.app.AlertDialog.Builder altdial = new android.app.AlertDialog.Builder(CheckNumber.this);
+        altdial.setMessage(text+"\nใช่เลขที่คุณต้องการหรือไม่?");
+        altdial.setCancelable(false);
+        altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 if (result.length() == 15){
                     String lot_num  = "";
                     String lot_time = "";
@@ -346,7 +403,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                         if (currentDate > lot_number) {
                             int index = dateSp.getSelectedItemPosition() + 1;
                             if (index >= dateSp.getAdapter().getCount()){
-                                Toast.makeText(this,"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
                                 return;
                             }
                             dateSp.setSelection(index);
@@ -355,7 +412,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                         else{
                             int index = dateSp.getSelectedItemPosition() - 1;
                             if (index< 0){
-                                Toast.makeText(this,"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
                                 return;
                             }
                             dateSp.setSelection(index);
@@ -375,10 +432,14 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                     checkNumberReward(lot_num);
                 }
                 else {
-                    Toast.makeText(this,"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
                 }
+
             }
-        }
+        });
+        android.app.AlertDialog alert = altdial.create();
+        alert.setTitle("Record");
+        alert.show();
     }
 }
 
