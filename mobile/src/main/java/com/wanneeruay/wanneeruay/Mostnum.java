@@ -58,7 +58,7 @@ public class Mostnum extends AppCompatActivity {
             String[] s = Menu.mostNum.get(j).split(",");
             settext.get(i).setText(s[0]);
             settext.get(i+1).setText(s[1]);
-            settext.get(i+2).setText(Menu.mostNum.get(j+1));
+            settext.get(i+2).setText(Menu.mostNum.get(j+1).replace(","," "));
             i+=3;
             j+=2;
         }
