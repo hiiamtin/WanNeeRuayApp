@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,12 +15,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-
 import java.io.IOException;
 
 public class Qrcode extends AppCompatActivity implements View.OnClickListener {
@@ -33,6 +32,11 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+            }
+        }
         setContentView(R.layout.activity_qrcode);
         surfaceView =  findViewById(R.id.Camsurface);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
@@ -40,6 +44,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         textView.setOnClickListener(this); //test
         cameraSource = new CameraSource.Builder(this,barcodeDetector).setRequestedPreviewSize(640,480).setAutoFocusEnabled(true).build();
         surfaceView.setOnClickListener(this);
+
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
@@ -47,7 +52,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                     return;
                 }
-
                 try{
                     cameraSource.start(holder);
                 }catch(IOException e)
@@ -70,9 +74,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-
             }
-
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
@@ -147,7 +149,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 alert.setTitle("Record");
                                 alert.show();
                             }
-
                         }
                     });
                 }
