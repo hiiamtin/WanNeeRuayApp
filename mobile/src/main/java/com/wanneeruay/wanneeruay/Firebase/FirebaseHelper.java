@@ -21,7 +21,7 @@ import java.util.Collections;
 
 public class FirebaseHelper {
 
-    DatabaseReference db,db2;
+    DatabaseReference dateDB, lottaryDB, mostnumDB, statisticDB;
     Boolean save = null;
     ArrayList<String> spacecrafts;
     ArrayList<Spacecraft> spacecraftDB = new ArrayList<>();
@@ -39,7 +39,7 @@ public class FirebaseHelper {
             save = false;
         }else{
             try {
-                db.child(spacecraft.getKey()).setValue(spacecraft.value);
+                dateDB.child(spacecraft.getKey()).setValue(spacecraft.value);
                 save=true;
             }catch (DatabaseException e){
                 e.printStackTrace();
@@ -51,10 +51,10 @@ public class FirebaseHelper {
 
     //READ
     public ArrayList<String> updateLottaryDate(Context context){
-        db = FB.getReference("lottary_date");
+        dateDB = FB.getReference("lottary_date");
         spacecrafts = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
+        dateDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData(dataSnapshot,spacecrafts);
@@ -79,14 +79,12 @@ public class FirebaseHelper {
     }
 
     public ArrayList<Spacecraft> updateLottaryDB(Context context){
-        db2 = FB.getReference("lottary_db");
-        status = false;
+        lottaryDB = FB.getReference("lottary_db");
         AlertDialog al = loadinPopUp(context);
-        db2.addListenerForSingleValueEvent(new ValueEventListener() {
+        lottaryDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData2(dataSnapshot,spacecraftDB);
-                status = true;
                 if(spacecraftDB.isEmpty()){
                     Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
                     loadDB(context);
@@ -132,9 +130,7 @@ public class FirebaseHelper {
         }
     }
 
-    public boolean isStatus() {
-        return status;
-    }
+
     private AlertDialog loadinPopUp(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);

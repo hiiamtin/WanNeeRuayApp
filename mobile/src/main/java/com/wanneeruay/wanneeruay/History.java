@@ -70,7 +70,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                     .setCancelable(false).setPositiveButton("No", (dialog, which) -> dialog.cancel())
                     .setNegativeButton("Yes", (dialog, which) -> {
                         String temp = number_his.get(position);
-                        for (int i = number_his.size()-1; i > 0 ;i--){
+                        for (int i = number_his.size()-1; i >= 0 ;i--){
                             if (number_his.get(i).equals(temp)){
                                 number_his.remove(i);
                                 break;
@@ -226,8 +226,9 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                     if (currentDate > lot_number) {
                         int index = dateSp.getSelectedItemPosition() + 1;
                         if (index >= dateSp.getAdapter().getCount()){
-                            Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
-                            break;
+                            Toast.makeText(this,"ขออภัย ไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                            return;
+
                         }
                         dateSp.setSelection(index);
                         currentDate -=1;
@@ -235,8 +236,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                     else{
                         int index = dateSp.getSelectedItemPosition() - 1;
                         if (index< 0){
-                            Toast.makeText(this,"ขอโทษไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
-                            break;
+                            Toast.makeText(this,"ขออภัย ไม่สามารถเก็บ เลข และว ันที่ ดังกล่าวได้", Toast.LENGTH_LONG).show();
+                            return;
                         }
                         dateSp.setSelection(index);
                         currentDate +=1;
