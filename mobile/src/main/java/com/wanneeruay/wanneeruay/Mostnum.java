@@ -49,7 +49,7 @@ public class Mostnum extends AppCompatActivity {
         settext.add(findViewById(R.id.acadrank10));
         settext.add(findViewById(R.id.percentrank10));
         settext.add(findViewById(R.id.numrank10));
-        //update();
+        update();
     }
 
     private void update(){

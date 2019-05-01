@@ -39,7 +39,6 @@ public class FirebaseHelper {
     //READ
     public ArrayList<String> updateLottaryDate(Context context){
         final boolean[] gotResult = new boolean[1];
-        gotResult[0] = false;
         dateArr = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
         ValueEventListener dataFetchEventListener = new ValueEventListener(){
@@ -47,11 +46,11 @@ public class FirebaseHelper {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData(dataSnapshot, dateArr);
                 if(dateArr.isEmpty()) {
-                    Toast.makeText(context, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    if(load(context, dateArr,"date")){
-                        Menu.date_new.setText(dateArr.get(0));
+                    //Toast.makeText(context, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
+                    //if(load(context, dateArr,"date")){
+                        //Menu.date_new.setText(dateArr.get(0));
                         gotResult[0] = true;
-                    }
+                    //}
                 }else{
                     Toast.makeText(context,"Date loaded",Toast.LENGTH_SHORT).show();
                     gotResult[0] = true;
@@ -79,29 +78,24 @@ public class FirebaseHelper {
             @Override
             public void run() {
                 timer.cancel();
-                if (gotResult[0] == false) { //  Timeout
+                if (!gotResult[0]) { //  Timeout
                     dateDB.removeEventListener(dataFetchEventListener);
                     // Your timeout code goes here
-                    Toast.makeText(context, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    if(load(context, dateArr,"date")){
-                        Menu.date_new.setText(dateArr.get(0));
-                        gotResult[0] = true;
-                    }
                     if(al.isShowing()){
                         al.cancel();
                     }
+                    if(load(context,"date"))Menu.setDate(dateArr);
+
                 }
             }
         };
             // Setting timeout of 5 sec to the request
             timer.schedule(timerTask, 5000L);
-
         return dateArr;
     }
 
     public ArrayList<Spacecraft> updateLottaryDB(Context context){
         final boolean[] gotResult = new boolean[1];
-        gotResult[0] = false;
         AlertDialog al = loadinPopUp(context);
         ValueEventListener dataFetchEventListener = new ValueEventListener(){
             @Override
@@ -137,11 +131,10 @@ public class FirebaseHelper {
             @Override
             public void run() {
                 timer.cancel();
-                if (gotResult[0] == false) { //  Timeout
-                    dateDB.removeEventListener(dataFetchEventListener);
+                if (!gotResult[0]) { //  Timeout
+                    lottaryDB.removeEventListener(dataFetchEventListener);
                     // Your timeout code goes here
-                    Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    loadDB(context);
+                    if(loadDB(context))Menu.setLottary_data(lottaryArr);
                     if(al.isShowing()){
                         al.cancel();
                     }
@@ -155,7 +148,6 @@ public class FirebaseHelper {
 
     public ArrayList<String> updateMostnum(Context context){
         final boolean[] gotResult = new boolean[1];
-        gotResult[0] = false;
         mostNumArr = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
         ValueEventListener dataFetchEventListener = new ValueEventListener(){
@@ -164,7 +156,7 @@ public class FirebaseHelper {
                 fetchData(dataSnapshot, mostNumArr);
                 if(mostNumArr.isEmpty()) {
                     Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    gotResult[0] = load(context, mostNumArr,"mostNum");
+                    gotResult[0] = load(context, "mostNum");
                 }else{
                     Toast.makeText(context,"MostNum loaded",Toast.LENGTH_SHORT).show();
                     saved(context, mostNumArr,"mostNum");
@@ -190,11 +182,10 @@ public class FirebaseHelper {
             @Override
             public void run() {
                 timer.cancel();
-                if (gotResult[0] == false) { //  Timeout
+                if (!gotResult[0]) { //  Timeout
                     mostnumDB.removeEventListener(dataFetchEventListener);
                     // Your timeout code goes here
-                    Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    gotResult[0] = load(context, mostNumArr,"mostNum");
+                    if(load(context,"mostNum"))Menu.setMostNum(mostNumArr);
                     if(al.isShowing()){
                         al.cancel();
                     }
@@ -207,28 +198,50 @@ public class FirebaseHelper {
     }
 
     public ArrayList<String> updateStatistic(Context context){
+        final boolean[] gotResult = new boolean[1];
         statisticArr = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
-        statisticDB.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener dataFetchEventListener = new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData(dataSnapshot, statisticArr);
                 if(statisticArr.isEmpty()) {
                     Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    load(context, statisticArr,"statistic");
+                    gotResult[0] = load(context, "statistic");
                 }else{
                     Toast.makeText(context,"statistic loaded",Toast.LENGTH_SHORT).show();
                     saved(context, statisticArr,"statistic");
+                    gotResult[0] = true;
                 }
-                al.cancel();
+                if(al.isShowing()){al.cancel();}
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 statisticArr.clear();
-                al.cancel();
+                gotResult[0] = true;
+                if(al.isShowing()){al.cancel();}
             }
-        });
+        };
+        statisticDB.addListenerForSingleValueEvent(dataFetchEventListener);
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+                if (!gotResult[0]) { //  Timeout
+                    statisticDB.removeEventListener(dataFetchEventListener);
+                    // Your timeout code goes here
+                    if(load(context,"statistic"))Menu.setStatistic(statisticArr);
+                    if(al.isShowing()){
+                        al.cancel();
+                    }
+                }
+            }
+        };
+        // Setting timeout of 5 sec to the request
+        timer.schedule(timerTask, 5000L);
+
         return statisticArr;
     }
 
@@ -272,15 +285,16 @@ public class FirebaseHelper {
         String json = sp.getString("DB_file",null);
         Type type = new TypeToken<ArrayList<Spacecraft>>() {}.getType();
         lottaryArr = gson.fromJson(json,type);
+        Menu.lottary_data =lottaryArr;
         if(lottaryArr == null){
-            Toast.makeText(context, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_SHORT).show();
             lottaryArr = new ArrayList<>();
             Spacecraft text = new Spacecraft();
             text.setKey("Error");
             lottaryArr.add(text);
             return false;
         }else{
-            Toast.makeText(context, "LOAD ข้อมูล DB สำรอง", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "LOAD ข้อมูล DB สำรอง", Toast.LENGTH_SHORT).show();
             return true;
         }
     }
@@ -295,21 +309,40 @@ public class FirebaseHelper {
         //Toast.makeText(context, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
     }
 
-    private boolean load(Context context,ArrayList<String> arrStr,String key){
+    private boolean load(Context context,String key){
         SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sp.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        arrStr = gson.fromJson(json,type);
-        if(arrStr == null){
-            Toast.makeText(context, "ไม่สามารถโหลดข้อมูลDateสำรองได้", Toast.LENGTH_SHORT).show();
-            arrStr = new ArrayList<>();
-            arrStr.add("Error");
-            return false;
-        }else{
-            Toast.makeText(context, "LOAD ข้อมูล Date สำรอง", Toast.LENGTH_SHORT).show();
-            return true;
+        if(key.equals("date")){
+            dateArr = gson.fromJson(json,type);
+            if(dateArr == null||dateArr.isEmpty()){
+                dateArr = new ArrayList<>();
+                dateArr.add("Error");
+                return false;
+            }else{
+                return true;
+            }
+        }else if(key.equals("mostNum")){
+            mostNumArr = gson.fromJson(json,type);
+            if(mostNumArr == null||mostNumArr.isEmpty()){
+                mostNumArr = new ArrayList<>();
+                mostNumArr.add("Error");
+                return false;
+            }else{
+                return true;
+            }
+        }else if(key.equals("statistic")){
+            statisticArr = gson.fromJson(json,type);
+            if(statisticArr == null||statisticArr.isEmpty()){
+                statisticArr = new ArrayList<>();
+                statisticArr.add("Error");
+                return false;
+            }else{
+                return true;
+            }
         }
+        return false;
     }
 
     private void saved(Context context,ArrayList<String>arrStr,String key){
@@ -319,7 +352,6 @@ public class FirebaseHelper {
         String json = gson.toJson(arrStr);
         editor.putString(key,json);
         editor.apply();
-        //Toast.makeText(context, "UPDATE FILE DATE", Toast.LENGTH_SHORT).show();
     }
 
 }

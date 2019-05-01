@@ -2,11 +2,13 @@ package com.wanneeruay.wanneeruay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.wanneeruay.wanneeruay.Firebase.FirebaseHelper;
@@ -35,12 +37,16 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         date_new = findViewById(R.id.date_text_main);
 
         helper = new FirebaseHelper(FirebaseDatabase.getInstance());
-        update();
         btRandom.setOnClickListener(this);
         btCheck.setOnClickListener(this);
         btHistory.setOnClickListener(this);
         btLektaided.setOnClickListener(this);
         btStatistic.setOnClickListener(this);
+        update();
+        new Handler().postDelayed(() -> {
+            //do something
+            if(date!=null)date_new.setText(date.get(0).trim());
+        }, 5000 );//time in milisecond
     }
 
     @Override
@@ -63,6 +69,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
                 startActivity(new Intent(this, Statistic.class));
                 break;
             case R.id.bt_lektaided:
+                //Toast.makeText(this,mostNum.toString(),Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this,Mostnum.class));
                 break;
         }
@@ -76,5 +83,20 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     }
 
 
+    public static void setDate(ArrayList<String> date) {
+        Menu.date = date;
+    }
+
+    public static void setMostNum(ArrayList<String> mostNum) {
+        Menu.mostNum = mostNum;
+    }
+
+    public static void setStatistic(ArrayList<String> statistic) {
+        Menu.statistic = statistic;
+    }
+
+    public static void setLottary_data(ArrayList<Spacecraft> lottary_data) {
+        Menu.lottary_data = lottary_data;
+    }
 
 }
