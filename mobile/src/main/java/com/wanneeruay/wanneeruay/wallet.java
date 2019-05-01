@@ -113,9 +113,12 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         int buy = sharedPreferences.getInt("ซื้อ",0);
         int bet = sharedPreferences.getInt("ถูก",0);
         int all = bet-buy;
-        if (all >= 0){
+        if (all > 0){
             status.setText("กำไร");
         }
+        else if(all == 0){
+           status.setText("สมดุล");
+       }
         else {
             status.setText("ขาดทุน");
         }

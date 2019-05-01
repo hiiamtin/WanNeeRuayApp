@@ -42,8 +42,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
-
-
         number = findViewById(R.id.text_input_numberC);
         final Button btConferm = findViewById(R.id.bt_confermC);
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
@@ -58,13 +56,10 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         settext.add(findViewById(R.id.frontnum3));
         settext.add(findViewById(R.id.lastnum3));
         settext.add(findViewById(R.id.lastnum2));
-
         dateSp.setAdapter(updateSpiner());
         dateSp.setOnItemSelectedListener(this);
-
         number.setBackgroundTintMode(PorterDuff.Mode.ADD);
         number.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorNOTOK,getTheme())));
-
         btConferm.setOnClickListener(this);
         ct.setOnClickListener(this);
         butQr2.setOnClickListener(this);
@@ -76,7 +71,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 showKeyboard(v);
             }
         });
-
     }
     @Override
     public void onClick(View v) {
@@ -86,7 +80,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 if(number.getError()==null) {
                     hideSoftKeyboard(v);
                     checkNumberReward(number.getText().toString());
-
                 }else{
                     number.requestFocus();
                 }
@@ -125,8 +118,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
@@ -140,12 +131,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }
         currentDate = (date.size() +1)- dateSp.getSelectedItemPosition();
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
-
     private void checkNumberReward(String s){
         //String s = number.getText().toString();
         boolean[] reward = new boolean[9];
@@ -270,27 +258,30 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 }
             }
         }
-     //   return x;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
-            builder.setMessage(x.toString());
-        }else{
-            builder.setMessage(x.toString()+"\nบันทึกลงในประวัติ?");
+            builder.setMessage(x.toString()+"\nคุณต้องการบันทึกลงในประวัติ?");
             builder.setNegativeButton("ไม่", (dialog, id) -> number.setText(""));
             builder.setPositiveButton("บันทึก", (dialog, id) -> {
-                //Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
+                ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
+                savehis(dateSp.getSelectedItem().toString(),text);
+                text.add(s);
+                number.setText("");
+            });
+        }else{
+            builder.setMessage(x.toString()+"\nคุณต้องการบันทึกลงในประวัติ?");
+            builder.setNegativeButton("ไม่", (dialog, id) -> number.setText(""));
+            builder.setPositiveButton("บันทึก", (dialog, id) -> {
                 ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
                 text.add(s);
                 savehis(dateSp.getSelectedItem().toString(),text);
-                //Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 number.setText("");
             });
         }
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     private ArrayAdapter<String> updateSpiner(){
         ArrayList<String> value = new ArrayList<>();
         for (String s:date.subList(1,date.size())) {
@@ -300,7 +291,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return data;
     }
-
     public void savehis(String key,ArrayList<String> data ){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
@@ -310,7 +300,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         editor.apply();
         savewal("ถูก",rewardPrice);
     }
-
     public ArrayList<String> loadhis(String key){
         ArrayList<String> value;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -339,8 +328,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ArrayList<String> number_his=loadhis("16 เมษายน 2562");
-        Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
         if (requestCode == 1){
             if(resultCode == RESULT_OK){
                 String result = data.getStringExtra("result");
