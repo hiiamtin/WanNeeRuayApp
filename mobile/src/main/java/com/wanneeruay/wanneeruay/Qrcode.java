@@ -174,6 +174,8 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 textView.setText("61-12-01-724628");
                 String text = textView.getText().toString().substring(9);
                 String result = textView.getText().toString();
+                String lot_time = "";
+                lot_time += result.substring(3,5);
                 String lot_year = result.substring(0,2);
                 if(result.substring(2,3).equals("-")== false){
                     Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
@@ -198,6 +200,11 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_LONG).show();
                     return;
                 }
+                if (Integer.parseInt(lot_time) > 48 ||Integer.parseInt(lot_time) == 0){
+                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่+", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 History.readQr = (String) textView.getText();
                 CheckNumber.readQr = (String) textView.getText();
                 AlertDialog.Builder altdial = new AlertDialog.Builder(Qrcode.this);
