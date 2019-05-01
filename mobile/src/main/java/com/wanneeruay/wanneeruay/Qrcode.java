@@ -171,7 +171,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.Qrstr :
-                textView.setText("61-12-01-724628");
+                textView.setText("62-12-01-724628");
                 String text = textView.getText().toString().substring(9);
                 String result = textView.getText().toString();
                 String lot_time = "";

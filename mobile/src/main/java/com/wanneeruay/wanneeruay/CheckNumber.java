@@ -39,7 +39,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     ArrayList<TextView> settext = new ArrayList<>();
     Spinner dateSp;
     int rewardPrice = 0;
-    int currentDate = 8;
+    int currentDate = date.size() +1 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +140,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             settext.get(i).setText(type.get(i).toString()
                     .replace("[", "").replace("]", "").replace(",",""));
         }
-        currentDate = 8- dateSp.getSelectedItemPosition();
+        currentDate = (date.size() +1)- dateSp.getSelectedItemPosition();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     static ArrayList<String> number_his = new ArrayList<String>();
     static Spinner dateSp;
     static ListView hisList ;
-    int currentDate = 8;
+    int currentDate = date.size()+1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,7 +160,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         if(number_his.toString().equals("[]") ){
             Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
         }
-        currentDate = 8- dateSp.getSelectedItemPosition();
+        currentDate = (date.size()+1)- dateSp.getSelectedItemPosition();
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
