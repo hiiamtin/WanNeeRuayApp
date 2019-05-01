@@ -341,7 +341,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         IntentResult result2 = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         String result = result2.toString();
         if(result.length() != 15){
-
             Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
             Intent resultIntent = new Intent();
             setResult(RESULT_CANCELED,resultIntent);
@@ -434,7 +433,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 else {
                     Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
         android.app.AlertDialog alert = altdial.create();

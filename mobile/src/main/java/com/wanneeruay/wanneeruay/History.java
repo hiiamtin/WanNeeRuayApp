@@ -241,31 +241,30 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result2 = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         String result = result2.toString();
+        Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
         if(result.length() != 15){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
-            Intent resultIntent = new Intent();
-            setResult(RESULT_CANCELED,resultIntent);
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่15", Toast.LENGTH_LONG).show();
             return;
         }
         String lot_year = result.substring(0,2);
         String lot_time = "";
         lot_time += result.substring(3,5);
         if(result.charAt(2) != '-'){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่2", Toast.LENGTH_LONG).show();
             return;
         }
         if(result.charAt(5) != '-'){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่5", Toast.LENGTH_LONG).show();
             return;
         }
         if(result.charAt(8) != '-'){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่8", Toast.LENGTH_LONG).show();
             return;
         }
         int[] Checktextqr = {0,1,3,4,6,7,9,10,11,12,13,14};
         for(int i =0; i < Checktextqr.length;i++){
             if (result.charAt(Checktextqr[i]) < '0' ||result.charAt(Checktextqr[i]) >'9'){
-                Toast.makeText(getApplicationContext(),Checktextqr[i], Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่qr", Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -274,7 +273,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
             return;
         }
         if (Integer.parseInt(lot_time) > 48 ||Integer.parseInt(lot_time) == 0){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่+", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
             return;
         }
         String text = result.substring(9);
@@ -289,7 +288,6 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (result.length() == 15){
                     String lot_num  = "";
                     String lot_time = "";
                     lot_num += result.substring(9);
@@ -322,11 +320,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                     }
                     loadhis(dateSp.getSelectedItem().toString());
                     number_his.add(number_his.size(),lot_num);
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
-                }
-                savehis(dateSp.getSelectedItem().toString(),number_his);
+                    savehis(dateSp.getSelectedItem().toString(),number_his);
             }
         });
         AlertDialog alert = altdial.create();
