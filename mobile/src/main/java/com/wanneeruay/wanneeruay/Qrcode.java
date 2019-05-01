@@ -105,16 +105,16 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 String result = textView.getText().toString();
                                 String lot_year = result.substring(0,2);
 
-                                if(result.substring(2,3).equals("-")== false){
-                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                if(result.charAt(2) != '-'){
+                                    Toast.makeText(getApplicationContext(),"2", Toast.LENGTH_LONG).show();
                                     return;
                                 }
-                                if(result.substring(5,6).equals("-")== false){
-                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                if(result.charAt(5) != '-'){
+                                    Toast.makeText(getApplicationContext(),"5", Toast.LENGTH_LONG).show();
                                     return;
                                 }
-                                if(result.substring(8,9).equals("-")== false){
-                                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+                                if(result.charAt(8) != '-'){
+                                    Toast.makeText(getApplicationContext(),"8", Toast.LENGTH_LONG).show();
                                     return;
                                 }
                                 int[] Checktextqr = {0,1,2,3,4,6,7,9,10,11,12,13,14};
@@ -131,6 +131,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 String text = textView.getText().toString().substring(9);
                                 History.readQr = (String) textView.getText();
                                 CheckNumber.readQr = (String) textView.getText();
+                                stop = false;
                                 AlertDialog.Builder altdial = new AlertDialog.Builder(Qrcode.this);
                                 altdial.setMessage(text+"\nใช่เลขที่คุณต้องการหรือไม่?");
                                 altdial.setCancelable(false);
@@ -138,7 +139,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         stop = true;
-                                        return;
                                     }
                                 });
                                 altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
@@ -153,7 +153,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 AlertDialog alert = altdial.create();
                                 alert.setTitle("Record");
                                 alert.show();
-                                stop = false;
                             }
 
                         }
