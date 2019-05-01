@@ -113,11 +113,8 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                 startActivity(new Intent(this, wallet.class));
                 break;
             case R.id.check_bt:
-                Intent intent2 = new Intent(History.this,CheckNumber.class);
-                startActivityForResult(intent2,1);
-                loadhis(dateSp.getSelectedItem().toString());
+                clear();
                 break;
-
         }
     }
     public void checkErrorTextInput(View v){
@@ -173,6 +170,14 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         editor.apply();
         loadhis(dateSp.getSelectedItem().toString());
     }
+
+    public void clear() {
+        for (int i =0; i < date.size() ; i++){
+            ArrayList<String> clearlist = new ArrayList<>();
+            savehis(date.get(i),clearlist);
+        }
+    }
+
     public void loadhis(String key){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
