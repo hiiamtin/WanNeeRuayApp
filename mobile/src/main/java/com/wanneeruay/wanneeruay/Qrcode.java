@@ -14,12 +14,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-
 import java.io.IOException;
 
 public class Qrcode extends AppCompatActivity implements View.OnClickListener {
@@ -70,9 +68,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-
             }
-
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
@@ -147,7 +143,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 alert.setTitle("Record");
                                 alert.show();
                             }
-
                         }
                     });
                 }
