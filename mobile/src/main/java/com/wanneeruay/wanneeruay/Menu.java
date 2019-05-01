@@ -43,10 +43,12 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         btLektaided.setOnClickListener(this);
         btStatistic.setOnClickListener(this);
         update();
-        new Handler().postDelayed(() -> {
-            //do something
-            if(date!=null)date_new.setText(date.get(0).trim());
-        }, 5000 );//time in milisecond
+        if(date.isEmpty()||date==null){
+            new Handler().postDelayed(() -> {
+                //do something
+                if(date!=null)date_new.setText(date.get(0).trim());
+            }, 5000 );//time in milisecond
+        }
     }
 
     @Override

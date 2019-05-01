@@ -26,15 +26,15 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
     private SensorManager sm;
     private float   ace1Val;    //current acc value and gravity
     private float   ace1Last;
+
     private float   shake;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random);
-
         picture = findViewById(R.id.p1);
+        Button btRandom = findViewById(R.id.bt_random);
         numberLayout = findViewById(R.id.bt_lektaided);
-        final Button btRandom = findViewById(R.id.bt_random);
         sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         sm.registerListener(sensorListener,sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_NORMAL);
         ace1Val = SensorManager.GRAVITY_EARTH;
@@ -86,6 +86,8 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
         number.setText(String.valueOf(new Random().nextInt(10)));
         number = findViewById(R.id.three2);
         number.setText(String.valueOf(new Random().nextInt(10)));
+        Button btRandom = findViewById(R.id.bt_random);
+        btRandom.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -97,7 +99,6 @@ public class RandomNumber extends AppCompatActivity implements View.OnClickListe
             Toast toast = Toast.makeText(getApplicationContext(),"Please Shake ME!!! <3" ,Toast.LENGTH_LONG);
             toast.setGravity(0,0,0);
             toast.show();
-
         }
         else{
             status = true;

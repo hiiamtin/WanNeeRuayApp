@@ -2,6 +2,7 @@ package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -133,7 +134,6 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
             }
         }
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         loadhis(dateSp.getSelectedItem().toString());
@@ -172,10 +172,27 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     }
 
     public void clear() {
-        for (int i =0; i < date.size() ; i++){
-            ArrayList<String> clearlist = new ArrayList<>();
-            savehis(date.get(i),clearlist);
-        }
+        AlertDialog.Builder altdial = new AlertDialog.Builder(History.this);
+        altdial.setMessage("คุณต้องการลบข้อมูลทั้งหมดใช่หรือไม่?");
+        altdial.setCancelable(false);
+        altdial.setPositiveButton("ไม่", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        altdial.setNegativeButton("ใช่", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for (int i =0; i < date.size() ; i++){
+                    ArrayList<String> clearlist = new ArrayList<>();
+                    savehis(date.get(i),clearlist);
+                }
+            }
+        });
+        AlertDialog alert = altdial.create();
+        alert.setTitle("Clear");
+        alert.show();
+
     }
 
     public void loadhis(String key){
