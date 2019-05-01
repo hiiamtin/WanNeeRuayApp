@@ -47,7 +47,6 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
     }
 
     @Override
@@ -58,10 +57,23 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         switch (v.getId()) {
             case R.id.OK:
                 if(wallettext.getText().toString().length() <=10   && wallettext.getText().toString().length() != 0)  {
+                    char[] checkinput ={'2','1','4','7','4','8','3','6','4','7'};
+                    String checktext =  wallettext.getText().toString();
+                    if(wallettext.getText().toString().length() ==10){
+                        for (int i =0; i < checktext.length();i++){
+                            if(checktext.charAt(i) > checkinput[i]){
+                                EditText priceLot = findViewById(R.id.budget);
+                                priceLot.setError("ไม่สามาถบันทึกลขที่ท่านต้องการได้");
+                                wallettext.setText("");
+                                return;
+                            }
+                        }
+                    }
                     EditText priceLot = findViewById(R.id.budget);
                     if (priceLot.getText().toString().equals("")) {
                         priceLot.setError("โปรดใส่ราคาที่ท่านต้องการ");
-                    } else {
+                    }
+                    else {
                         if (spin.getSelectedItem().toString().equals("ซื้อ")) {
                             int budget = Integer.parseInt(wallettext.getText().toString());// + Integer.parseInt(budall.getText().toString()) ;
                             savewal(spin.getSelectedItem().toString(), budget);
@@ -78,12 +90,10 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
                     wallettext.setText("");
                 }
                 break;
-
             case R.id.clear:
                 clearwallet();
                 break;
         }
-
     }
     public void savewal(String key,int data){
         int before =0;
