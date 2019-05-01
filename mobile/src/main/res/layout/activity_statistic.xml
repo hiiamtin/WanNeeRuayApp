@@ -65,7 +65,6 @@
             android:textAlignment="center"
             android:textColor="@color/colorTextblack"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:typeface="normal" />
     </LinearLayout>
 
