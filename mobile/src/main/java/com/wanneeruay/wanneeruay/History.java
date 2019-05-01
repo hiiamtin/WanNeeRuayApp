@@ -2,14 +2,11 @@ package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.view.MotionEvent;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,12 +27,12 @@ import java.util.ArrayList;
 
 public class History extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
 
-    static EditText number;
+    EditText number;
     static ArrayList<String> date=Menu.date;
     static String readQr;
-    static ArrayList<String> number_his = new ArrayList<String>();
-    static Spinner dateSp;
-    static ListView hisList ;
+    static ArrayList<String> number_his = new ArrayList<>();
+    Spinner dateSp;
+    ListView hisList ;
     int currentDate = date.size()+1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,38 +64,26 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
             }
         });
         loadhis(dateSp.getSelectedItem().toString());
-        hisList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder altdial = new AlertDialog.Builder(History.this);
-                altdial.setMessage("Do you want to delete this number?")
-                        .setCancelable(false).setPositiveButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.cancel();
-                    }
-                })
-                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String temp = number_his.get(position);
-                                for (int i = number_his.size()-1; i > 0 ;i--){
-                                    if (number_his.get(i).equals(temp)){
-                                        number_his.remove(i);
-                                        break;
-                                    }
-                                }
-
-                                savehis(dateSp.getSelectedItem().toString(),number_his);
-                                dialog.cancel();
+        hisList.setOnItemLongClickListener((parent, view, position, id) -> {
+            AlertDialog.Builder altdial = new AlertDialog.Builder(History.this);
+            altdial.setMessage("Do you want to delete this number?")
+                    .setCancelable(false).setPositiveButton("No", (dialog, which) -> dialog.cancel())
+                    .setNegativeButton("Yes", (dialog, which) -> {
+                        String temp = number_his.get(position);
+                        for (int i = number_his.size()-1; i > 0 ;i--){
+                            if (number_his.get(i).equals(temp)){
+                                number_his.remove(i);
+                                break;
                             }
-                        });
-                AlertDialog alert = altdial.create();
-                alert.setTitle("DELETE");
-                alert.show();
-                return false;
-            }
+                        }
+
+                        savehis(dateSp.getSelectedItem().toString(),number_his);
+                        dialog.cancel();
+                    });
+            AlertDialog alert = altdial.create();
+            alert.setTitle("DELETE");
+            alert.show();
+            return false;
         });
     }
     @Override
@@ -154,8 +138,6 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        //Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
         loadhis(dateSp.getSelectedItem().toString());
         if(number_his.toString().equals("[]") ){
             Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
@@ -178,23 +160,9 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     private ArrayAdapter<String> updateSpiner(){
         ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,date);
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
-        //dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        return data;
-    }
-    private ArrayAdapter<String> updatelistView(){
-        ArrayAdapter<String> data = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,Menu.date);
-        data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //ArrayAdapter<CharSequence> dateSelecAp = ArrayAdapter.createFromResource(this,R.array.lottary_date,android.R.layout.simple_spinner_item);
-        //dateSelecAp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return data;
     }
 
-    public  void toastprint() {
-        Toast toast = Toast.makeText(getApplicationContext(), readQr, Toast.LENGTH_LONG);
-        toast.setGravity(0, 0, 0);
-        toast.show();
-    }
     public void savehis(String key,ArrayList<String> data ){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
@@ -210,18 +178,17 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
         String json = sharedPreferences.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         number_his = gson.fromJson(json,type);
-        ArrayList<String> text = new ArrayList<String>();
+        ArrayList<String> text = new ArrayList<>();
         if((number_his == null) || (number_his.toString().equals("[]") )){
-            //Toast.makeText(this, "คุณไม่ได้ซื้อลอตเตอรี่ในงวดนี้", Toast.LENGTH_LONG).show();
             hisList.setVisibility(View.INVISIBLE);
-            number_his = new ArrayList<String>();
+            number_his = new ArrayList<>();
         }
         else{
-            ArrayList<String> number_his2 = new ArrayList<String>();
+            ArrayList<String> number_his2 = new ArrayList<>();
             number_his2.addAll(number_his);
             for(int i = 0;i < number_his2.size();i++)
             {
-                int  count =1;;
+                int  count =1;
                 String temp = number_his2.get(i);
                 text.add(text.size(),temp);
                 for(int h =i+1; h < number_his2.size();h++){
@@ -231,20 +198,17 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
                         h-=1;
                     }
                 }
-                text.set(i,text.get(i)+"                                                        "+Integer.toString(count)+"ใบ");
+                text.set(i,text.get(i)+"                                                        "+count+"ใบ");
             }
-            //Toast.makeText(this, number_his.toString(), Toast.LENGTH_LONG).show();
             hisList.setVisibility(View.VISIBLE);
             ArrayAdapter hisAdabt = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,text);
             hisList.setAdapter(hisAdabt);
-            //Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //number.setText("555555");
         if (requestCode == 1){
             if(resultCode == RESULT_OK){
                 String result = data.getStringExtra("result");

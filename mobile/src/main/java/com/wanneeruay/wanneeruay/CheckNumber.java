@@ -1,8 +1,6 @@
 package com.wanneeruay.wanneeruay;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -148,7 +146,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    private String checkNumberReward(String s){
+    private void checkNumberReward(String s){
         //String s = number.getText().toString();
         boolean[] reward = new boolean[9];
         if(s.equals(settext.get(0).getText().toString())){
@@ -247,31 +245,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         }
         AlertDialog dialog = builder.create();
         dialog.show();
-        return x;
-    }
-
-    private void popupSaveHistory(String s){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        if(s.equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
-            builder.setMessage(s);
-        }else{
-            builder.setMessage(s+"\nบันทึกลงในประวัติ?");
-            builder.setNegativeButton("ไม่", (dialog, id) -> {
-                number.setText("");
-            });
-            builder.setPositiveButton("บันทึก", (dialog, id) -> {
-                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
-                ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
-                text.add(number.getText().toString());
-                savehis(dateSp.getSelectedItem().toString(),text);
-                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
-                number.setText("");
-            });
-
-        }
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private ArrayAdapter<String> updateSpiner(){
@@ -331,8 +304,8 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                     lot_time += result.substring(3,5);
                     String lot_year = result.substring(0,2);
                     int lot_number = (Integer.parseInt(lot_time)+1)/2;
-                    if (Integer.parseInt(lot_year) == 61){
-                        lot_number -= 24;
+                    if (Integer.parseInt(lot_year) <62){
+                        lot_number -= 24*(62-Integer.parseInt(lot_year));
                     }
                     while (currentDate != lot_number) {
                         if (currentDate > lot_number) {
