@@ -27,16 +27,10 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
     CameraSource cameraSource;
     BarcodeDetector barcodeDetector;
     TextView textView;
-
     boolean stop = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
-            }
-        }
         setContentView(R.layout.activity_qrcode);
         surfaceView =  findViewById(R.id.Camsurface);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
@@ -44,22 +38,21 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
         textView.setOnClickListener(this); //test
         cameraSource = new CameraSource.Builder(this,barcodeDetector).setRequestedPreviewSize(640,480).setAutoFocusEnabled(true).build();
         surfaceView.setOnClickListener(this);
-
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-
                 if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                    return;
-                }
-                try{
-                    cameraSource.start(holder);
-                }catch(IOException e)
-                {
-                    e.printStackTrace();
-                }
-
+                return;
             }
+                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+                try{
+                cameraSource.start(holder);
+            }catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+
+        }
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -87,6 +80,7 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                                 textView.setText(qrCodes.valueAt(0).displayValue);
                                 String result = textView.getText().toString();
                                 if(result.length() != 15){
+
                                     Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
                                     Intent resultIntent = new Intent();
                                     setResult(RESULT_CANCELED,resultIntent);
