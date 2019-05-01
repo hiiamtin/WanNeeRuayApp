@@ -44,7 +44,6 @@ public class Qrcode extends AppCompatActivity implements View.OnClickListener {
                 if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                 return;
             }
-                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
                 try{
                 cameraSource.start(holder);
             }catch(IOException e)
