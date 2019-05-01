@@ -49,16 +49,18 @@ public class Mostnum extends AppCompatActivity {
         settext.add(findViewById(R.id.acadrank10));
         settext.add(findViewById(R.id.percentrank10));
         settext.add(findViewById(R.id.numrank10));
-        update();
+        //update();
     }
 
     private void update(){
-        int i = 0;
+        int i=0,j = 0;
         while (i<settext.size()) {
-            String[] s = Menu.mostNum.get(i).split(",");
+            String[] s = Menu.mostNum.get(j).split(",");
             settext.get(i).setText(s[0]);
             settext.get(i+1).setText(s[1]);
-            i=settext.size();
+            settext.get(i+2).setText(Menu.mostNum.get(j+1));
+            i+=3;
+            j+=2;
         }
     }
 }
