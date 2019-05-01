@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -21,76 +20,59 @@ import java.util.Collections;
 
 public class FirebaseHelper {
 
-    DatabaseReference dateDB, lottaryDB, mostnumDB, statisticDB;
-    Boolean save = null;
-    ArrayList<String> spacecrafts;
-    ArrayList<Spacecraft> spacecraftDB = new ArrayList<>();
-    FirebaseDatabase FB;
-    boolean status=false;
+    private DatabaseReference dateDB, lottaryDB, mostnumDB, statisticDB;
+    private ArrayList<String> dateArr, mostNumArr, statisticArr;
+    private ArrayList<Spacecraft> lottarySP = new ArrayList<>();
+    private FirebaseDatabase FB;
 
     public FirebaseHelper(FirebaseDatabase FB) {
         this.FB = FB;
-    }
-
-
-    //SAVE
-    public Boolean save(Spacecraft spacecraft){
-        if(spacecraft==null){
-            save = false;
-        }else{
-            try {
-                dateDB.child(spacecraft.getKey()).setValue(spacecraft.value);
-                save=true;
-            }catch (DatabaseException e){
-                e.printStackTrace();
-                save=false;
-            }
-        }
-        return save;
+        dateDB = FB.getReference("lottary_date");
+        mostnumDB = FB.getReference("mostNum");
+        lottaryDB = FB.getReference("lottary_db");
+        statisticDB = FB.getReference("statisticNum");
     }
 
     //READ
     public ArrayList<String> updateLottaryDate(Context context){
-        dateDB = FB.getReference("lottary_date");
-        spacecrafts = new ArrayList<>();
+        dateArr = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
         dateDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                fetchData(dataSnapshot,spacecrafts);
-                if(spacecrafts.isEmpty()) {
+                fetchData(dataSnapshot, dateArr);
+                if(dateArr.isEmpty()) {
                     Toast.makeText(context, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    loadDate(context);
+                    load(context, dateArr,"date");
                 }else{
                     Toast.makeText(context,"Date loaded",Toast.LENGTH_SHORT).show();
-                    Collections.reverse(spacecrafts);
-                    savedDate(context);
+                    Collections.reverse(dateArr);
+                    saved(context, dateArr,"date");
                 }
                 al.cancel();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                spacecrafts.clear();
+                dateArr.clear();
                 al.cancel();
             }
         });
-        return spacecrafts;
+        return dateArr;
     }
 
     public ArrayList<Spacecraft> updateLottaryDB(Context context){
-        lottaryDB = FB.getReference("lottary_db");
         AlertDialog al = loadinPopUp(context);
         lottaryDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                fetchData2(dataSnapshot,spacecraftDB);
-                if(spacecraftDB.isEmpty()){
+                fetchData2(dataSnapshot, lottarySP);
+                if(lottarySP.isEmpty()){
                     Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
                     loadDB(context);
                 }else{
                     Toast.makeText(context,"DB loaded",Toast.LENGTH_SHORT).show();
-                    Collections.reverse(spacecraftDB);
+                    Collections.reverse(lottarySP);
                     savedDB(context);
                 }
                 al.cancel();
@@ -98,13 +80,63 @@ public class FirebaseHelper {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                spacecraftDB.clear();
-                status=false;
+                lottarySP.clear();
                 al.cancel();
                 Toast.makeText(context,"can't loaded",Toast.LENGTH_SHORT).show();
             }
         });
-        return spacecraftDB;
+        return lottarySP;
+    }
+
+    public ArrayList<String> updateMostnum(Context context){
+        mostNumArr = new ArrayList<>();
+        AlertDialog al = loadinPopUp(context);
+        mostnumDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                fetchData(dataSnapshot, mostNumArr);
+                if(mostNumArr.isEmpty()) {
+                    Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
+                    load(context, mostNumArr,"mostNum");
+                }else{
+                    Toast.makeText(context,"MostNum loaded",Toast.LENGTH_SHORT).show();
+                    saved(context, mostNumArr,"mostNum");
+                }
+                al.cancel();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                mostNumArr.clear();
+                al.cancel();
+            }
+        });
+        return mostNumArr;
+    }
+    public ArrayList<String> updateStatistic(Context context){
+        statisticArr = new ArrayList<>();
+        AlertDialog al = loadinPopUp(context);
+        statisticDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                fetchData(dataSnapshot, statisticArr);
+                if(statisticArr.isEmpty()) {
+                    Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
+                    load(context, statisticArr,"statistic");
+                }else{
+                    Toast.makeText(context,"statistic loaded",Toast.LENGTH_SHORT).show();
+                    saved(context, statisticArr,"statistic");
+                }
+                al.cancel();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                statisticArr.clear();
+                al.cancel();
+            }
+        });
+        return statisticArr;
     }
 
     private void fetchData(DataSnapshot snapshot,ArrayList<String> sp){
@@ -142,53 +174,53 @@ public class FirebaseHelper {
     }
 
     private void loadDB(Context context){
-        SharedPreferences sp = context.getSharedPreferences("lottary_db", context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sp.getString("DB_file",null);
         Type type = new TypeToken<ArrayList<Spacecraft>>() {}.getType();
-        spacecraftDB = gson.fromJson(json,type);
-        if(spacecraftDB == null){
+        lottarySP = gson.fromJson(json,type);
+        if(lottarySP == null){
             Toast.makeText(context, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_SHORT).show();
-            spacecraftDB = new ArrayList<>();
+            lottarySP = new ArrayList<>();
             Spacecraft text = new Spacecraft();
             text.setKey("Error");
-            spacecraftDB.add(text);
+            lottarySP.add(text);
         }else{
             Toast.makeText(context, "LOAD ข้อมูล DB สำรอง", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void savedDB(Context context){
-        SharedPreferences sp = context.getSharedPreferences("lottary_db", context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(spacecraftDB);
+        String json = gson.toJson(lottarySP);
         editor.putString("DB_file",json);
         editor.apply();
         //Toast.makeText(context, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
     }
 
-    private void loadDate(Context context){
-        SharedPreferences sp = context.getSharedPreferences("lottary_db", context.MODE_PRIVATE);
+    private void load(Context context,ArrayList<String> arrStr,String key){
+        SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sp.getString("DB_file",null);
+        String json = sp.getString(key,null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        spacecrafts = gson.fromJson(json,type);
-        if(spacecrafts == null){
+        arrStr = gson.fromJson(json,type);
+        if(arrStr == null){
             Toast.makeText(context, "ไม่สามารถโหลดข้อมูลDateสำรองได้", Toast.LENGTH_SHORT).show();
-            spacecrafts = new ArrayList<>();
-            spacecrafts.add("Error");
+            arrStr = new ArrayList<>();
+            arrStr.add("Error");
         }else{
             Toast.makeText(context, "LOAD ข้อมูล Date สำรอง", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void savedDate(Context context){
-        SharedPreferences sp = context.getSharedPreferences("lottary_db", context.MODE_PRIVATE);
+    private void saved(Context context,ArrayList<String>arrStr,String key){
+        SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(spacecrafts);
-        editor.putString("DB_file",json);
+        String json = gson.toJson(arrStr);
+        editor.putString(key,json);
         editor.apply();
         //Toast.makeText(context, "UPDATE FILE DATE", Toast.LENGTH_SHORT).show();
     }
