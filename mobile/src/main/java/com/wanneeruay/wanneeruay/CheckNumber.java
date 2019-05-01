@@ -339,7 +339,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result2 = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        String result = result2.toString();
+        String result = result2.getContents().trim();
         if(result.length() != 15){
             Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
             Intent resultIntent = new Intent();
@@ -350,89 +350,83 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         String lot_time = "";
         lot_time += result.substring(3,5);
         if(result.charAt(2) != '-'){
-            Toast.makeText(getApplicationContext(),"2", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         if(result.charAt(5) != '-'){
-            Toast.makeText(getApplicationContext(),"5", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         if(result.charAt(8) != '-'){
-            Toast.makeText(getApplicationContext(),"8", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         int[] Checktextqr = {0,1,3,4,6,7,9,10,11,12,13,14};
         for(int i =0; i < Checktextqr.length;i++){
             if (result.charAt(Checktextqr[i]) < '0' ||result.charAt(Checktextqr[i]) >'9'){
-                Toast.makeText(getApplicationContext(),Checktextqr[i], Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         if (!lot_year.equals("62") && !lot_year.equals("61")){
-            Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_SHORT).show();
             return;
         }
         if (Integer.parseInt(lot_time) > 48 ||Integer.parseInt(lot_time) == 0){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่+", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         String text = result.substring(9);
         android.app.AlertDialog.Builder altdial = new android.app.AlertDialog.Builder(CheckNumber.this);
         altdial.setMessage(text+"\nใช่เลขที่คุณต้องการหรือไม่?");
         altdial.setCancelable(false);
-        altdial.setPositiveButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
+        altdial.setPositiveButton("No", (dialog, which) -> {
         });
-        altdial.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (result.length() == 15){
-                    String lot_num  = "";
-                    String lot_time = "";
-                    lot_num += result.substring(9);
-                    lot_time += result.substring(3,5);
-                    String lot_year = result.substring(0,2);
-                    int lot_number = (Integer.parseInt(lot_time)+1)/2;
-                    if (Integer.parseInt(lot_year) <62){
-                        lot_number -= 24*(62-Integer.parseInt(lot_year));
-                    }
-                    while (currentDate != lot_number) {
-                        if (currentDate > lot_number) {
-                            int index = dateSp.getSelectedItemPosition() + 1;
-                            if (index >= dateSp.getAdapter().getCount()){
-                                Toast.makeText(getApplicationContext(),"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
-                                return;
-                            }
-                            dateSp.setSelection(index);
-                            currentDate -=1;
-                        }
-                        else{
-                            int index = dateSp.getSelectedItemPosition() - 1;
-                            if (index< 0){
-                                Toast.makeText(getApplicationContext(),"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
-                                return;
-                            }
-                            dateSp.setSelection(index);
-                            currentDate +=1;
-                        }
-                    }
-                    if(lot_num.length() != 6){
-                        return;
-                    }
-                    Spacecraft group = lottary_data.get(dateSp.getSelectedItemPosition());
-                    ArrayList<ArrayList<String>> type = group.getValue();
-                    for (int i = 0; i < 9; i++) {
-                        Collections.sort(type.get(i));
-                        settext.get(i).setText(type.get(i).toString()
-                                .replace("[", "").replace("]", "").replace(",",""));
-                    }
-                    checkNumberReward(lot_num);
+        altdial.setNegativeButton("Yes", (dialog, which) -> {
+            if (result.length() == 15){
+                String lot_num  = "";
+                String lot_time1 = "";
+                lot_num += result.substring(9);
+                lot_time1 += result.substring(3,5);
+                String lot_year1 = result.substring(0,2);
+                int lot_number = (Integer.parseInt(lot_time1)+1)/2;
+                if (Integer.parseInt(lot_year1) <62){
+                    lot_number -= 24*(62-Integer.parseInt(lot_year1));
                 }
-                else {
-                    Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
+                while (currentDate != lot_number) {
+                    if (currentDate > lot_number) {
+                        int index = dateSp.getSelectedItemPosition() + 1;
+                        if (index >= dateSp.getAdapter().getCount()){
+                            Toast.makeText(getApplicationContext(),"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        dateSp.setSelection(index);
+                        currentDate -=1;
+                    }
+                    else{
+                        int index = dateSp.getSelectedItemPosition() - 1;
+                        if (index< 0){
+                            Toast.makeText(getApplicationContext(),"ขออภัย ไม่สามารภตรวจข้อมูลดังกล่าวได้", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        dateSp.setSelection(index);
+                        currentDate +=1;
+                    }
                 }
+                if(lot_num.length() != 6){
+                    return;
+                }
+                Spacecraft group = lottary_data.get(dateSp.getSelectedItemPosition());
+                ArrayList<ArrayList<String>> type = group.getValue();
+                for (int i = 0; i < 9; i++) {
+                    Collections.sort(type.get(i));
+                    settext.get(i).setText(type.get(i).toString()
+                            .replace("[", "").replace("]", "").replace(",",""));
+                }
+                checkNumberReward(lot_num);
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_LONG).show();
             }
         });
         android.app.AlertDialog alert = altdial.create();
