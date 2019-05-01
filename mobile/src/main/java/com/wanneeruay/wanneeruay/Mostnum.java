@@ -11,6 +11,8 @@ public class Mostnum extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final TextView date_new = findViewById(R.id.date_text_mostnum);
+        date_new.setText(Menu.date_new.getText());
         setContentView(R.layout.activity_mostnum);
         ArrayList<TextView> settext = new ArrayList<>();
         settext.add(findViewById(R.id.acadrank1));

@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.wanneeruay.wanneeruay.Menu;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -43,10 +44,13 @@ public class FirebaseHelper {
                 fetchData(dataSnapshot, dateArr);
                 if(dateArr.isEmpty()) {
                     Toast.makeText(context, "ไม่สามารถอัพเดตDateได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    load(context, dateArr,"date");
+                    if(load(context, dateArr,"date")){
+                        Menu.date_new.setText(dateArr.get(0));
+                    }
                 }else{
                     Toast.makeText(context,"Date loaded",Toast.LENGTH_SHORT).show();
                     Collections.reverse(dateArr);
+                    Menu.date_new.setText(dateArr.get(0));
                     saved(context, dateArr,"date");
                 }
                 al.cancel();
@@ -200,7 +204,7 @@ public class FirebaseHelper {
         //Toast.makeText(context, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
     }
 
-    private void load(Context context,ArrayList<String> arrStr,String key){
+    private boolean load(Context context,ArrayList<String> arrStr,String key){
         SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sp.getString(key,null);
@@ -210,8 +214,10 @@ public class FirebaseHelper {
             Toast.makeText(context, "ไม่สามารถโหลดข้อมูลDateสำรองได้", Toast.LENGTH_SHORT).show();
             arrStr = new ArrayList<>();
             arrStr.add("Error");
+            return false;
         }else{
             Toast.makeText(context, "LOAD ข้อมูล Date สำรอง", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 

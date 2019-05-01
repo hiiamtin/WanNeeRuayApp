@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import com.google.firebase.database.FirebaseDatabase;
 import com.wanneeruay.wanneeruay.Firebase.FirebaseHelper;
 import com.wanneeruay.wanneeruay.Firebase.Spacecraft;
@@ -17,6 +19,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     public static ArrayList<String> date,mostNum,statistic;
     public static ArrayList<Spacecraft> lottary_data;
     public static Context context;
+    public static TextView date_new;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
         final Button btLektaided = findViewById(R.id.bt_lektaided);
         final Button btStatistic = findViewById(R.id.bt_statistic);
         context = this;
+        date_new = findViewById(R.id.date_text_main);
 
         helper = new FirebaseHelper(FirebaseDatabase.getInstance());
         update();
