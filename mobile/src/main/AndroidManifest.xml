@@ -22,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Qrcode"></activity>
         <activity
             android:name=".wallet"
             android:screenOrientation="portrait" />
