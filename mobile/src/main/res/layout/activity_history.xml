@@ -137,7 +137,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:backgroundTint="#F44336"
-                android:text="check"
+                android:text="CLEAR"
                 android:textColor="#FFFCFC"
                 android:textSize="18sp"
                 android:textStyle="bold" />

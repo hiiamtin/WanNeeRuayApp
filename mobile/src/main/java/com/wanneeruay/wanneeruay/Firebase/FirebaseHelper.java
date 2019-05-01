@@ -25,7 +25,7 @@ public class FirebaseHelper {
 
     private DatabaseReference dateDB, lottaryDB, mostnumDB, statisticDB;
     private ArrayList<String> dateArr, mostNumArr, statisticArr;
-    private ArrayList<Spacecraft> lottarySP = new ArrayList<>();
+    private ArrayList<Spacecraft> lottaryArr = new ArrayList<>();
     private FirebaseDatabase FB;
 
     public FirebaseHelper(FirebaseDatabase FB) {
@@ -93,64 +93,119 @@ public class FirebaseHelper {
                 }
             }
         };
-            // Setting timeout of 10 sec to the request
+            // Setting timeout of 5 sec to the request
             timer.schedule(timerTask, 5000L);
 
         return dateArr;
     }
 
     public ArrayList<Spacecraft> updateLottaryDB(Context context){
+        final boolean[] gotResult = new boolean[1];
+        gotResult[0] = false;
         AlertDialog al = loadinPopUp(context);
-        lottaryDB.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener dataFetchEventListener = new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                fetchData2(dataSnapshot, lottarySP);
-                if(lottarySP.isEmpty()){
+                fetchData2(dataSnapshot, lottaryArr);
+                if(lottaryArr.isEmpty()){
                     Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    loadDB(context);
+                    gotResult[0] = loadDB(context);
                 }else{
                     Toast.makeText(context,"DB loaded",Toast.LENGTH_SHORT).show();
-                    Collections.reverse(lottarySP);
+                    Collections.reverse(lottaryArr);
                     savedDB(context);
+                    gotResult[0] = true;
                 }
-                al.cancel();
+                if(al.isShowing()){
+                    al.cancel();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                lottarySP.clear();
-                al.cancel();
+                lottaryArr.clear();
+                gotResult[0] = true;
+                if(al.isShowing()){
+                    al.cancel();
+                }
                 Toast.makeText(context,"can't loaded",Toast.LENGTH_SHORT).show();
             }
-        });
-        return lottarySP;
+        };
+        lottaryDB.addListenerForSingleValueEvent(dataFetchEventListener);
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+                if (gotResult[0] == false) { //  Timeout
+                    dateDB.removeEventListener(dataFetchEventListener);
+                    // Your timeout code goes here
+                    Toast.makeText(context, "ไม่สามารถอัพเดตฐานข้อมูลได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
+                    loadDB(context);
+                    if(al.isShowing()){
+                        al.cancel();
+                    }
+                }
+            }
+        };
+        // Setting timeout of 5 sec to the request
+        timer.schedule(timerTask, 5000L);
+        return lottaryArr;
     }
 
     public ArrayList<String> updateMostnum(Context context){
+        final boolean[] gotResult = new boolean[1];
+        gotResult[0] = false;
         mostNumArr = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
-        mostnumDB.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener dataFetchEventListener = new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchData(dataSnapshot, mostNumArr);
                 if(mostNumArr.isEmpty()) {
                     Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
-                    load(context, mostNumArr,"mostNum");
+                    gotResult[0] = load(context, mostNumArr,"mostNum");
                 }else{
                     Toast.makeText(context,"MostNum loaded",Toast.LENGTH_SHORT).show();
                     saved(context, mostNumArr,"mostNum");
+                    gotResult[0] = true;
                 }
-                al.cancel();
+                if(al.isShowing()){
+                    al.cancel();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 mostNumArr.clear();
-                al.cancel();
+                gotResult[0] = true;
+                if(al.isShowing()){
+                    al.cancel();
+                }
             }
-        });
+        };
+        mostnumDB.addListenerForSingleValueEvent(dataFetchEventListener);
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+                if (gotResult[0] == false) { //  Timeout
+                    mostnumDB.removeEventListener(dataFetchEventListener);
+                    // Your timeout code goes here
+                    Toast.makeText(context, "ไม่สามารถอัพเดต mostNum ได้\nโปรดตรวจสอบการเชื่อมต่อ", Toast.LENGTH_SHORT).show();
+                    gotResult[0] = load(context, mostNumArr,"mostNum");
+                    if(al.isShowing()){
+                        al.cancel();
+                    }
+                }
+            }
+        };
+        // Setting timeout of 5 sec to the request
+        timer.schedule(timerTask, 5000L);
         return mostNumArr;
     }
+
     public ArrayList<String> updateStatistic(Context context){
         statisticArr = new ArrayList<>();
         AlertDialog al = loadinPopUp(context);
@@ -211,20 +266,22 @@ public class FirebaseHelper {
         return dialog;
     }
 
-    private void loadDB(Context context){
+    private boolean loadDB(Context context){
         SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sp.getString("DB_file",null);
         Type type = new TypeToken<ArrayList<Spacecraft>>() {}.getType();
-        lottarySP = gson.fromJson(json,type);
-        if(lottarySP == null){
+        lottaryArr = gson.fromJson(json,type);
+        if(lottaryArr == null){
             Toast.makeText(context, "ไม่สามารถโหลดข้อมูลสำรองได้", Toast.LENGTH_SHORT).show();
-            lottarySP = new ArrayList<>();
+            lottaryArr = new ArrayList<>();
             Spacecraft text = new Spacecraft();
             text.setKey("Error");
-            lottarySP.add(text);
+            lottaryArr.add(text);
+            return false;
         }else{
             Toast.makeText(context, "LOAD ข้อมูล DB สำรอง", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 
@@ -232,7 +289,7 @@ public class FirebaseHelper {
         SharedPreferences sp = context.getSharedPreferences("lottary_db", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(lottarySP);
+        String json = gson.toJson(lottaryArr);
         editor.putString("DB_file",json);
         editor.apply();
         //Toast.makeText(context, "UPDATE FILE DB", Toast.LENGTH_SHORT).show();
