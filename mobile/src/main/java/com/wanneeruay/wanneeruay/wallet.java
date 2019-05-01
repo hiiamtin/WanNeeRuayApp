@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class wallet extends AppCompatActivity implements AdapterView.OnItemSelectedListener ,View.OnClickListener {
     EditText wallettext;
     Spinner spin;
-    TextView sum,budall,proall;
+    TextView sum,budall,proall,status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
         sum  = findViewById(R.id.Sum);
         budall  = findViewById(R.id.expendprice);
         proall  = findViewById(R.id.incomeprice);
+        status = findViewById(R.id.status);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.wallet, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
@@ -56,20 +57,28 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.OK:
-                EditText priceLot = findViewById(R.id.budget);
-                if (priceLot.getText().toString().equals("")) {
-                priceLot.setError("โปรดใส่ราคาที่ท่านต้องการ");
-                } else {
-                if (spin.getSelectedItem().toString().equals("ซื้อ")) {
-                    int budget = Integer.parseInt(wallettext.getText().toString());// + Integer.parseInt(budall.getText().toString()) ;
-                    savewal(spin.getSelectedItem().toString(), budget);
-                } else if (spin.getSelectedItem().toString().equals("ถูก")) {
-                    int profit = Integer.parseInt(wallettext.getText().toString());// +  Integer.parseInt(proall.getText().toString()) ;
-                    savewal(spin.getSelectedItem().toString(), profit);
-                }
-                priceLot.setText("");
-                break;
+                if(wallettext.getText().toString().length() <=10   && wallettext.getText().toString().length() != 0)  {
+                    EditText priceLot = findViewById(R.id.budget);
+                    if (priceLot.getText().toString().equals("")) {
+                        priceLot.setError("โปรดใส่ราคาที่ท่านต้องการ");
+                    } else {
+                        if (spin.getSelectedItem().toString().equals("ซื้อ")) {
+                            int budget = Integer.parseInt(wallettext.getText().toString());// + Integer.parseInt(budall.getText().toString()) ;
+                            savewal(spin.getSelectedItem().toString(), budget);
+                        } else if (spin.getSelectedItem().toString().equals("ถูก")) {
+                            int profit = Integer.parseInt(wallettext.getText().toString());// +  Integer.parseInt(proall.getText().toString()) ;
+                            savewal(spin.getSelectedItem().toString(), profit);
+                        }
+                        priceLot.setText("");
                     }
+                }
+                else{
+                    EditText priceLot = findViewById(R.id.budget);
+                    priceLot.setError("ไม่สามาถบันทึกลขที่ท่านต้องการได้");
+                    wallettext.setText("");
+                }
+                break;
+
             case R.id.clear:
                 clearwallet();
                 break;
@@ -93,13 +102,20 @@ public class wallet extends AppCompatActivity implements AdapterView.OnItemSelec
        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         int buy = sharedPreferences.getInt("ซื้อ",0);
         int bet = sharedPreferences.getInt("ถูก",0);
-        int all =  bet-buy;
-        sum.setText(Integer.toString(all));
+        int all = bet-buy;
+        if (all >= 0){
+            status.setText("กำไร");
+        }
+        else {
+            status.setText("ขาดทุน");
+        }
+        int absall = java.lang.Math.abs(all);
+        sum.setText(Integer.toString(absall));
         budall.setText(Integer.toString(buy));
         proall.setText(Integer.toString(bet));
-    }
+}
     public void clearwallet(){
-        SharedPreferences clear = getSharedPreferences("Wallet", Menu.MODE_PRIVATE);
+        SharedPreferences clear = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = clear.edit();
         editor.putInt("ซื้อ",0);
         editor.apply();
