@@ -115,6 +115,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
             case R.id.check_bt:
                 Intent intent2 = new Intent(History.this,CheckNumber.class);
                 startActivityForResult(intent2,1);
+                loadhis(dateSp.getSelectedItem().toString());
                 break;
 
         }

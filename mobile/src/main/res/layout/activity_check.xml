@@ -37,6 +37,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/check"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"

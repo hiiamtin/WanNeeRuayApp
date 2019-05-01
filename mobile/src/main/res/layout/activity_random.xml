@@ -28,13 +28,14 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/history_text"
+        android:id="@+id/random_text_top"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-black"
         android:text="เขย่าเลข"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"

@@ -182,44 +182,90 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
                 break;
             }
         }
-        String x = "เสียใจด้วยคุณไม่ถูกรางวัลใดๆ";
+        StringBuilder x = new StringBuilder("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ");
         for (int i = 0; i < reward.length; i++) {
             if (reward[i]){
                 switch (i){
                     case 0:
-                        x="ถูกรางวัลที่1";
-                        rewardPrice = 6000000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัลที่1");
+                            rewardPrice = 6000000;
+                        }else{
+                            x.append(",ถูกรางวัลที่1");
+                            rewardPrice += 6000000;
+                        }
                         break;
                     case 1:
-                        x="ถูกรางวัลข้างเคียงที่1";
-                        rewardPrice = 100000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัลข้างเคียงที่1");
+                            rewardPrice = 100000;
+                        }else{
+                            x.append(",ถูกรางวัลข้างเคียงที่1");
+                            rewardPrice += 100000;
+                        }
                         break;
                     case 2:
-                        x="ถูกรางวัลที่2";
-                        rewardPrice = 200000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัลที่2");
+                            rewardPrice = 200000;
+                        }else{
+                            x.append(",ถูกรางวัลที่2");
+                            rewardPrice += 200000;
+                        }
                         break;
                     case 3:
-                        x="ถูกรางวัลที่3";
-                        rewardPrice = 80000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัลที่3");
+                            rewardPrice = 80000;
+                        }else{
+                            x.append(",ถูกรางวัลที่3");
+                            rewardPrice += 80000;
+                        }
                         break;
                     case 4:
-                        x="ถูกรางวัลที่4";
-                        rewardPrice = 40000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัลที่4");
+                            rewardPrice = 40000;
+                        }else{
+                            x.append(",ถูกรางวัลที่4");
+                            rewardPrice += 40000;
+                        }
                         break;
                     case 5:
-                        x="ถูกรางวัลที่5";
-                        rewardPrice = 20000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัลที่5");
+                            rewardPrice = 20000;
+                        }else{
+                            x.append(",ถูกรางวัลที่5");
+                            rewardPrice += 20000;
+                        }
                         break;
                     case 6:
-                        x="ถูกรางวัล3ตัวหน้า";
-                        rewardPrice = 4000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัล3ตัวหน้า");
+                            rewardPrice = 4000;
+                        }else{
+                            x.append(",ถูกรางวัล3ตัวหน้า");
+                            rewardPrice += 4000;
+                        }
                         break;
                     case 7:
-                        x="ถูกรางวัล3ตัวท้าย";
-                        rewardPrice = 4000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัล3ตัวท้าย");
+                            rewardPrice = 4000;
+                        }else{
+                            x.append(",ถูกรางวัล3ตัวท้าย");
+                            rewardPrice += 4000;
+                        }
+                        break;
                     case 8:
-                        x="ถูกรางวัล2ตัวท้าย";
-                        rewardPrice = 2000;
+                        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+                            x = new StringBuilder("ถูกรางวัล2ตัวท้าย");
+                            rewardPrice = 2000;
+                        }else{
+                            x.append(",ถูกรางวัล2ตัวท้าย");
+                            rewardPrice += 2000;
+                        }
                         break;
                 }
             }
@@ -227,19 +273,17 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
      //   return x;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        if(x.equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
-            builder.setMessage(x);
+        if(x.toString().equals("เสียใจด้วยคุณไม่ถูกรางวัลใดๆ")){
+            builder.setMessage(x.toString());
         }else{
-            builder.setMessage(x+"\nบันทึกลงในประวัติ?");
-            builder.setNegativeButton("ไม่", (dialog, id) -> {
-                number.setText("");
-            });
+            builder.setMessage(x.toString()+"\nบันทึกลงในประวัติ?");
+            builder.setNegativeButton("ไม่", (dialog, id) -> number.setText(""));
             builder.setPositiveButton("บันทึก", (dialog, id) -> {
-                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
                 text.add(s);
                 savehis(dateSp.getSelectedItem().toString(),text);
-                Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,loadhis(dateSp.getSelectedItem().toString()).toString(),Toast.LENGTH_SHORT).show();
                 number.setText("");
             });
         }
@@ -291,7 +335,6 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //number.setText("555555");
         ArrayList<String> number_his=loadhis("16 เมษายน 2562");
         Toast.makeText(this,number_his.toString(), Toast.LENGTH_LONG).show();
         if (requestCode == 1){
