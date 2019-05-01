@@ -37,7 +37,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
     ArrayList<String> date=Menu.date;
     ArrayList<Spacecraft> lottary_data=Menu.lottary_data;
     static String readQr;
-    ArrayList<TextView> settext = new ArrayList<>();
+    ArrayList<TextView> settext;
     Spinner dateSp;
     int rewardPrice = 0;
     int currentDate = date.size() +1 ;
@@ -51,6 +51,7 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
         final ConstraintLayout ct = findViewById(R.id.constraintLayoutC);
         final Button butQr2 = findViewById(R.id.QrbutC);
         dateSp = findViewById(R.id.spinner_date);
+        settext = new ArrayList<TextView>();
         settext.add(findViewById(R.id.awardnum1));
         settext.add(findViewById(R.id.nearnum1));
         settext.add(findViewById(R.id.awardnum2));

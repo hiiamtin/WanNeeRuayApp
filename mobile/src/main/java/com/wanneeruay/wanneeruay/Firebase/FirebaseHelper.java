@@ -25,7 +25,7 @@ public class FirebaseHelper {
 
     private DatabaseReference dateDB, lottaryDB, mostnumDB, statisticDB;
     private ArrayList<String> dateArr, mostNumArr, statisticArr;
-    private ArrayList<Spacecraft> lottaryArr = new ArrayList<>();
+    private ArrayList<Spacecraft> lottaryArr;
     private FirebaseDatabase FB;
 
     public FirebaseHelper(FirebaseDatabase FB) {
@@ -34,6 +34,7 @@ public class FirebaseHelper {
         mostnumDB = FB.getReference("mostNum");
         lottaryDB = FB.getReference("lottary_db");
         statisticDB = FB.getReference("statisticNum");
+        lottaryArr = new ArrayList<Spacecraft>();
     }
 
     //READ

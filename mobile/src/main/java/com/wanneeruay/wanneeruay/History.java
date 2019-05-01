@@ -32,7 +32,7 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     EditText number;
     static ArrayList<String> date=Menu.date;
     static String readQr;
-    static ArrayList<String> number_his = new ArrayList<>();
+    static ArrayList<String> number_his = new ArrayList<String>();
     Spinner dateSp;
     ListView hisList ;
     final Activity activity = this;
