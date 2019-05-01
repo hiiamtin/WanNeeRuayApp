@@ -240,40 +240,40 @@ public class History extends AppCompatActivity implements View.OnClickListener,A
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result2 = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        String result = result2.toString();
+        String result = result2.getContents().trim();
         Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
         if(result.length() != 15){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่15", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         String lot_year = result.substring(0,2);
         String lot_time = "";
         lot_time += result.substring(3,5);
         if(result.charAt(2) != '-'){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่2", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         if(result.charAt(5) != '-'){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่5", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         if(result.charAt(8) != '-'){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่8", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         int[] Checktextqr = {0,1,3,4,6,7,9,10,11,12,13,14};
         for(int i =0; i < Checktextqr.length;i++){
             if (result.charAt(Checktextqr[i]) < '0' ||result.charAt(Checktextqr[i]) >'9'){
-                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่qr", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ของลอตเอตรี่", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         if (!lot_year.equals("62") && !lot_year.equals("61")){
-            Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ขออภัยไม่สามรถเก็บ วันที่ และ ข้อมูล ดังกล่าวได้", Toast.LENGTH_SHORT).show();
             return;
         }
         if (Integer.parseInt(lot_time) > 48 ||Integer.parseInt(lot_time) == 0){
-            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Qrcode ของคุณไม่ใช่ลอตเตอรี่", Toast.LENGTH_SHORT).show();
             return;
         }
         String text = result.substring(9);
