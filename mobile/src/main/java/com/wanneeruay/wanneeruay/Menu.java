@@ -50,7 +50,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
             new Handler().postDelayed(() -> {
                 //do something
                 if(date!=null)date_new.setText(date.get(0).trim());
-            }, 5000 );//time in milisecond
+            }, 6000 );//time in milisecond
         }
     }
 
