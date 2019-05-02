@@ -41,7 +41,7 @@ CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterVi
     ArrayList<TextView> settext;
     Spinner dateSp;
     int rewardPrice = 0;
-    int currentDate = date.size() +1 ;
+    int currentDate = date.size();
     final Activity activity = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +140,7 @@ CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterVi
             settext.get(i).setText(type.get(i).toString()
                     .replace("[", "").replace("]", "").replace(",",""));
         }
-        currentDate = (date.size() +1)- dateSp.getSelectedItemPosition();
+        currentDate = (date.size())- dateSp.getSelectedItemPosition();
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
