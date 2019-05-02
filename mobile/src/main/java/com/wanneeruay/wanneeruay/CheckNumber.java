@@ -31,7 +31,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class
+CheckNumber extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     EditText number;
     ArrayList<String> date=Menu.date;
@@ -275,8 +276,9 @@ public class CheckNumber extends AppCompatActivity implements View.OnClickListen
             builder.setNegativeButton("ไม่", (dialog, id) -> number.setText(""));
             builder.setPositiveButton("บันทึก", (dialog, id) -> {
                 ArrayList<String> text = loadhis(dateSp.getSelectedItem().toString());
-                savehis(dateSp.getSelectedItem().toString(),text);
                 text.add(s);
+                savehis(dateSp.getSelectedItem().toString(),text);
+
                 number.setText("");
             });
         }else{
